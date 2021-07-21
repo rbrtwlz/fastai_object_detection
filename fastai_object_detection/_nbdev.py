@@ -3,12 +3,27 @@
 __all__ = ["index", "modules", "custom_doc_links", "git_url"]
 
 index = {"say_hello": "01_dataloaders.ipynb",
-         "__all__": "02_datasets.ipynb",
-         "CocoData": "02_datasets.ipynb"}
+         "CocoData": "02_datasets.ipynb",
+         "ObjDetAdapter": "03_callbacks.ipynb",
+         "ObjDetLearner": "05_learners.ipynb",
+         "InstSegLearner": "05_learners.ipynb",
+         "no_split": "05_learners.ipynb",
+         "rcnn_split": "05_learners.ipynb",
+         "effdet_split": "05_learners.ipynb",
+         "fasterrcnn_learner": "05_learners.ipynb",
+         "maskrcnn_learner": "05_learners.ipynb",
+         "efficientdet_learner": "05_learners.ipynb",
+         "ObjDetLearner.get_preds": "05_learners.ipynb",
+         "ObjDetLearner.show_results": "05_learners.ipynb",
+         "InstSegLearner.get_preds": "05_learners.ipynb",
+         "InstSegLearner.show_results": "05_learners.ipynb"}
 
 modules = ["core.py",
            "dataloaders.py",
-           "datasets.py"]
+           "datasets.py",
+           "callbacks.py",
+           "learners.py",
+           "metrics.py"]
 
 doc_url = "https://rbrtwlz.github.io/fastai_object_detection/"
 

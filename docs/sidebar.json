@@ -1,6 +1,13 @@
 {
   "fastai_object_detection": {
     "Overview": "/",
-    "module name here": "datasets.html"
+    "Core": "core.html",
+    "Dataloaders": "dataloaders.html",
+    "Datasets": "datasets.html",
+    "Callbacks": "callbacks.html",
+    "Models": "models.html",
+    "FasterRCNN": "models.fasterrcnn.html",
+    "Learners": "learners.html",
+    "module name here": "metrics.html"
   }
 }

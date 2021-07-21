@@ -10,8 +10,29 @@ entries:
       title: Overview
       url: /
     - output: web,pdf
-      title: module name here
+      title: Core
+      url: core.html
+    - output: web,pdf
+      title: Dataloaders
+      url: dataloaders.html
+    - output: web,pdf
+      title: Datasets
       url: datasets.html
+    - output: web,pdf
+      title: Callbacks
+      url: callbacks.html
+    - output: web,pdf
+      title: Models
+      url: models.html
+    - output: web,pdf
+      title: FasterRCNN
+      url: models.fasterrcnn.html
+    - output: web,pdf
+      title: Learners
+      url: learners.html
+    - output: web,pdf
+      title: module name here
+      url: metrics.html
     output: web
     title: fastai_object_detection
   output: web
