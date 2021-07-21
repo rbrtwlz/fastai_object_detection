@@ -31,7 +31,7 @@ entries:
       title: Learners
       url: learners.html
     - output: web,pdf
-      title: module name here
+      title: Metrics
       url: metrics.html
     output: web
     title: fastai_object_detection

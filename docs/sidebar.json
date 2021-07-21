@@ -8,6 +8,6 @@
     "Models": "models.html",
     "FasterRCNN": "models.fasterrcnn.html",
     "Learners": "learners.html",
-    "module name here": "metrics.html"
+    "Metrics": "metrics.html"
   }
 }
