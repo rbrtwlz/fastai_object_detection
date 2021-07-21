@@ -11,7 +11,7 @@ entries:
       url: /
     - output: web,pdf
       title: module name here
-      url: core.html
+      url: datasets.html
     output: web
     title: fastai_object_detection
   output: web

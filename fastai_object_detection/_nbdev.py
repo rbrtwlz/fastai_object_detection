@@ -2,9 +2,13 @@
 
 __all__ = ["index", "modules", "custom_doc_links", "git_url"]
 
-index = {"say_hello": "00_core.ipynb"}
+index = {"say_hello": "01_dataloaders.ipynb",
+         "__all__": "02_datasets.ipynb",
+         "CocoData": "02_datasets.ipynb"}
 
-modules = ["core.py"]
+modules = ["core.py",
+           "dataloaders.py",
+           "datasets.py"]
 
 doc_url = "https://rbrtwlz.github.io/fastai_object_detection/"
 
