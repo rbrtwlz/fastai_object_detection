@@ -8,7 +8,9 @@ __all__ = ['no_split', 'rcnn_split', 'effdet_split', 'ObjDetLearner', 'InstSegLe
 from fastai.vision.all import *
 from fastprogress.fastprogress import progress_bar
 from .callbacks import *
-
+from .models.fasterrcnn import get_fasterrcnn_model
+from .models.maskrcnn import get_maskrcnn_model
+from .models.efficientdet import get_efficientdet_model
 
 # Cell
 
@@ -175,6 +177,7 @@ def show_results(x:InstSegLearner, items, max_n=9, box_score_thresh=0.6, bin_mas
 
 # Cell
 
+@delegates(get_fasterrcnn_model)
 class fasterrcnn_learner(ObjDetLearner):
     """ fastai-style learner to train fasterrcnn models """
     def __init__(self, dls, model, pretrained=True, pretrained_backbone=True, num_classes=None,
@@ -197,6 +200,7 @@ class fasterrcnn_learner(ObjDetLearner):
 
 # Cell
 
+@delegates(get_maskrcnn_model)
 class maskrcnn_learner(InstSegLearner):
     """ fastai-style learner to train maskrcnn models """
     def __init__(self, dls, model, pretrained=True, pretrained_backbone=True, num_classes=None,
@@ -217,6 +221,7 @@ class maskrcnn_learner(InstSegLearner):
 
 # Cell
 
+@delegates(get_efficientdet_model)
 class efficientdet_learner(ObjDetLearner):
     """ fastai-style learner to train efficientdet models """
     def __init__(self, dls, model, pretrained=True, pretrained_backbone=True, num_classes=None,
