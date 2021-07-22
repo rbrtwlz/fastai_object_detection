@@ -26,6 +26,107 @@ nb_path: "notebooks/06_metrics.ipynb"
     
 <div class="cell border-box-sizing code_cell rendered">
 
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stderr output_text">
+<pre>/home/user/jupyter/env/lib/python3.7/site-packages/torch/cuda/__init__.py:52: UserWarning: CUDA initialization: Found no NVIDIA driver on your system. Please check that you have an NVIDIA GPU and installed a driver from http://www.nvidia.com/Download/index.aspx (Triggered internally at  /pytorch/c10/cuda/CUDAFunctions.cpp:100.)
+  return torch._C._cuda_getDeviceCount() &gt; 0
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+    {% endraw %}
+
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+
+</div>
+    {% endraw %}
+
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+
+<div class="output_markdown rendered_html output_subarea ">
+<h2 id="mAP_Metric" class="doc_header"><code>class</code> <code>mAP_Metric</code><a href="https://github.com/rbrtwlz/fastai_object_detection/tree/master/fastai_object_detection/metrics.py#L14" class="source_link" style="float:right">[source]</a></h2><blockquote><p><code>mAP_Metric</code>(<strong><code>iou_thresholds</code></strong>, <strong><code>recall_thresholds</code></strong>=<em><code>None</code></em>, <strong><code>mpolicy</code></strong>=<em><code>'greedy'</code></em>, <strong><code>name</code></strong>=<em><code>'mAP'</code></em>, <strong><code>remove_background_class</code></strong>=<em><code>True</code></em>)</p>
+</blockquote>
+<p>Metric to calculate mAP for different IoU thresholds</p>
+
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+    {% endraw %}
+
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+
+</div>
+    {% endraw %}
+
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+
+</div>
+    {% endraw %}
+
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+
+<div class="output_markdown rendered_html output_subarea ">
+<h4 id="create_mAP_metric" class="doc_header"><code>create_mAP_metric</code><a href="https://github.com/rbrtwlz/fastai_object_detection/tree/master/fastai_object_detection/metrics.py#L83" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>create_mAP_metric</code>(<strong><code>iou_tresh</code></strong>, <strong><code>recall_thresholds</code></strong>, <strong><code>mpolicy</code></strong>, <strong><code>metric_name</code></strong>, <strong><code>remove_background_class</code></strong>=<em><code>True</code></em>)</p>
+</blockquote>
+<p>Creates a function to pass into learner for measuring mAP.
+iou_tresh: float or np.arange, f.e.: np.arange(0.5, 1.0, 0.05)
+recall_thresholds: None or np.arange, f.e.: np.arange(0., 1.01, 0.01)
+mpolicy: str, 'soft' or 'greedy'
+metric_name: str, name to display in fastai´s recorder</p>
+<h2 id="remove_background_class:-True-or-False,-remove-first-index-before-evaluation,-as-it-represents-background-class-in-our-dataloader">remove_background_class: True or False, remove first index before evaluation, as it represents background class in our dataloader<a class="anchor-link" href="#remove_background_class:-True-or-False,-remove-first-index-before-evaluation,-as-it-represents-background-class-in-our-dataloader"> </a></h2><p>Metric Examples:
+COCO mAP: set recall_thresholds=np.arange(0., 1.01, 0.01), mpolicy="soft"
+VOC PASCAL mAP: set recall_thresholds=np.arange(0., 1.1, 0.1), mpolicy="greedy"
+VOC PASCAL mAP in all points: set recall_thresholds=None, mpolicy="greedy"</p>
+
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+    {% endraw %}
+
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+
 </div>
     {% endraw %}
 

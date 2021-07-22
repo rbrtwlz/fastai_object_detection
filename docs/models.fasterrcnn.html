@@ -26,6 +26,193 @@ nb_path: "notebooks/04a_models.fasterrcnn.ipynb"
     
 <div class="cell border-box-sizing code_cell rendered">
 
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stderr output_text">
+<pre>/home/user/jupyter/env/lib/python3.7/site-packages/torch/cuda/__init__.py:52: UserWarning: CUDA initialization: Found no NVIDIA driver on your system. Please check that you have an NVIDIA GPU and installed a driver from http://www.nvidia.com/Download/index.aspx (Triggered internally at  /pytorch/c10/cuda/CUDAFunctions.cpp:100.)
+  return torch._C._cuda_getDeviceCount() &gt; 0
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+    {% endraw %}
+
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+
+</div>
+    {% endraw %}
+
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+
+</div>
+    {% endraw %}
+
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+
+<div class="output_markdown rendered_html output_subarea ">
+<h4 id="get_fasterrcnn_model" class="doc_header"><code>get_fasterrcnn_model</code><a href="https://github.com/rbrtwlz/fastai_object_detection/tree/master/fastai_object_detection/models/fasterrcnn.py#L39" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>get_fasterrcnn_model</code>(<strong><code>arch_str</code></strong>, <strong><code>num_classes</code></strong>, <strong><code>pretrained</code></strong>=<em><code>True</code></em>, <strong><code>pretrained_backbone</code></strong>=<em><code>True</code></em>, <strong><code>trainable_layers</code></strong>=<em><code>5</code></em>, <strong>**<code>kwargs</code></strong>)</p>
+</blockquote>
+
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+    {% endraw %}
+
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+
+</div>
+    {% endraw %}
+
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+
+<div class="output_markdown rendered_html output_subarea ">
+<h4 id="get_fasterrcnn_model_swin" class="doc_header"><code>get_fasterrcnn_model_swin</code><a href="https://github.com/rbrtwlz/fastai_object_detection/tree/master/fastai_object_detection/models/fasterrcnn.py#L89" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>get_fasterrcnn_model_swin</code>(<strong><code>arch_str</code></strong>, <strong><code>num_classes</code></strong>, <strong><code>pretrained</code></strong>=<em><code>False</code></em>, <strong><code>pretrained_backbone</code></strong>=<em><code>True</code></em>, <strong>**<code>kwargs</code></strong>)</p>
+</blockquote>
+
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+    {% endraw %}
+
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+
+</div>
+    {% endraw %}
+
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+
+<div class="output_markdown rendered_html output_subarea ">
+<h2 id="SwinTransformerFPN" class="doc_header"><code>class</code> <code>SwinTransformerFPN</code><a href="https://github.com/rbrtwlz/fastai_object_detection/tree/master/fastai_object_detection/models/fasterrcnn.py#L135" class="source_link" style="float:right">[source]</a></h2><blockquote><p><code>SwinTransformerFPN</code>(<strong><code>img_size</code></strong>=<em><code>224</code></em>, <strong><code>window_size</code></strong>=<em><code>7</code></em>, <strong><code>embed_dim</code></strong>=<em><code>96</code></em>, <strong><code>depths</code></strong>=<em><code>[2, 2, 6, 2]</code></em>, <strong><code>fpn_cin</code></strong>=<em><code>[96, 192, 384, 768]</code></em>, <strong><code>fpn_cout</code></strong>=<em><code>256</code></em>) :: <code>Module</code></p>
+</blockquote>
+<p>Base class for all neural network modules.</p>
+<p>Your models should also subclass this class.</p>
+<p>Modules can also contain other Modules, allowing to nest them in
+a tree structure. You can assign the submodules as regular attributes::</p>
+
+<pre><code>import torch.nn as nn
+import torch.nn.functional as F
+
+class Model(nn.Module):
+    def __init__(self):
+        super(Model, self).__init__()
+        self.conv1 = nn.Conv2d(1, 20, 5)
+        self.conv2 = nn.Conv2d(20, 20, 5)
+
+    def forward(self, x):
+        x = F.relu(self.conv1(x))
+        return F.relu(self.conv2(x))
+
+</code></pre>
+<p>Submodules assigned in this way will be registered, and will have their
+parameters converted too when you call :meth:<code>to</code>, etc.</p>
+<p>:ivar training: Boolean represents whether this module is in training or
+                evaluation mode.
+:vartype training: bool</p>
+
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+    {% endraw %}
+
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+
+</div>
+    {% endraw %}
+
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+
+</div>
+    {% endraw %}
+
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span> 
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    {% endraw %}
+
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span> 
+</pre></div>
+
+    </div>
+</div>
+</div>
+
 </div>
     {% endraw %}
 
