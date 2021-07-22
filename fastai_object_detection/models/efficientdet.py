@@ -9,6 +9,7 @@ import torch.nn as nn
 from torchvision.ops.boxes import batched_nms
 from torchvision.models.utils import load_state_dict_from_url
 from functools import partial
+from fastai.vision.all import delegates
 from ..external.efficientdet_source import FocalLoss, BBoxTransform, ClipBoxes, EfficientDetBackbone
 
 # Cell
@@ -104,7 +105,7 @@ class EffDetModelWrapper(nn.Module):
         return out
 
 # Cell
-
+# hide
 
 _effdet_model_urls = {
     "efficientdet-d0": "https://github.com/zylo117/Yet-Another-Efficient-Pytorch/releases/download/1.0/efficientdet-d0.pth",
@@ -121,6 +122,7 @@ _effdet_model_urls = {
 
 # Cell
 
+@delegates(EffDetModelWrapper)
 def get_efficientdet_model(num_classes, compound_coef=0, pretrained_backbone=True, pretrained=True,
                            nms_score_thresh=0.05, nms_iou_thresh=0.50 ,
                            focal_loss_alpha=0.25, focal_loss_gamma=2.0, **kwargs):
@@ -145,6 +147,7 @@ def get_efficientdet_model(num_classes, compound_coef=0, pretrained_backbone=Tru
 
 
 # Cell
+# hide
 
 efficientdet_d0 = partial(get_efficientdet_model, compound_coef=0)
 efficientdet_d1 = partial(get_efficientdet_model, compound_coef=1)

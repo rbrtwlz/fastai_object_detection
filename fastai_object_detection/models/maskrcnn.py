@@ -11,8 +11,10 @@ from torchvision.models.detection.anchor_utils import AnchorGenerator
 from torchvision.models.detection import MaskRCNN
 from torchvision.ops.misc import FrozenBatchNorm2d
 from functools import partial
+from fastai.vision.all import delegates
 
 # Cell
+#hide
 
 _model_urls = {
     'maskrcnn_resnet50_fpn_coco':
@@ -21,6 +23,7 @@ _model_urls = {
 
 # Cell
 
+@delegates(MaskRCNN)
 def get_maskrcnn_model(arch_str, num_classes, pretrained=False, pretrained_backbone=True,
                  trainable_layers=5, **kwargs):
 
@@ -58,6 +61,7 @@ def get_maskrcnn_model(arch_str, num_classes, pretrained=False, pretrained_backb
     return model
 
 # Cell
+#hide
 
 maskrcnn_resnet18 = partial(get_maskrcnn_model, arch_str="resnet18")
 maskrcnn_resnet34 = partial(get_maskrcnn_model, arch_str="resnet34")

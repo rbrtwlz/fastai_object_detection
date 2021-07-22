@@ -26,12 +26,20 @@ nb_path: "notebooks/04b_models.maskrcnn.ipynb"
     
 <div class="cell border-box-sizing code_cell rendered">
 
-</div>
-    {% endraw %}
+<div class="output_wrapper">
+<div class="output">
 
-    {% raw %}
-    
-<div class="cell border-box-sizing code_cell rendered">
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stderr output_text">
+<pre>/home/user/jupyter/env/lib/python3.7/site-packages/torch/cuda/__init__.py:52: UserWarning: CUDA initialization: Found no NVIDIA driver on your system. Please check that you have an NVIDIA GPU and installed a driver from http://www.nvidia.com/Download/index.aspx (Triggered internally at  /pytorch/c10/cuda/CUDAFunctions.cpp:100.)
+  return torch._C._cuda_getDeviceCount() &gt; 0
+</pre>
+</div>
+</div>
+
+</div>
+</div>
 
 </div>
     {% endraw %}
@@ -54,7 +62,7 @@ nb_path: "notebooks/04b_models.maskrcnn.ipynb"
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="get_maskrcnn_model" class="doc_header"><code>get_maskrcnn_model</code><a href="https://github.com/rbrtwlz/fastai_object_detection/tree/master/fastai_object_detection/models/maskrcnn.py#L24" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>get_maskrcnn_model</code>(<strong><code>arch_str</code></strong>, <strong><code>num_classes</code></strong>, <strong><code>pretrained</code></strong>=<em><code>False</code></em>, <strong><code>pretrained_backbone</code></strong>=<em><code>True</code></em>, <strong><code>trainable_layers</code></strong>=<em><code>5</code></em>, <strong>**<code>kwargs</code></strong>)</p>
+<h4 id="get_maskrcnn_model" class="doc_header"><code>get_maskrcnn_model</code><a href="https://github.com/rbrtwlz/fastai_object_detection/tree/master/fastai_object_detection/models/maskrcnn.py#L26" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>get_maskrcnn_model</code>(<strong><code>arch_str</code></strong>, <strong><code>num_classes</code></strong>, <strong><code>pretrained</code></strong>=<em><code>False</code></em>, <strong><code>pretrained_backbone</code></strong>=<em><code>True</code></em>, <strong><code>trainable_layers</code></strong>=<em><code>5</code></em>, <strong><code>min_size</code></strong>=<em><code>800</code></em>, <strong><code>max_size</code></strong>=<em><code>1333</code></em>, <strong><code>image_mean</code></strong>=<em><code>None</code></em>, <strong><code>image_std</code></strong>=<em><code>None</code></em>, <strong><code>rpn_anchor_generator</code></strong>=<em><code>None</code></em>, <strong><code>rpn_head</code></strong>=<em><code>None</code></em>, <strong><code>rpn_pre_nms_top_n_train</code></strong>=<em><code>2000</code></em>, <strong><code>rpn_pre_nms_top_n_test</code></strong>=<em><code>1000</code></em>, <strong><code>rpn_post_nms_top_n_train</code></strong>=<em><code>2000</code></em>, <strong><code>rpn_post_nms_top_n_test</code></strong>=<em><code>1000</code></em>, <strong><code>rpn_nms_thresh</code></strong>=<em><code>0.7</code></em>, <strong><code>rpn_fg_iou_thresh</code></strong>=<em><code>0.7</code></em>, <strong><code>rpn_bg_iou_thresh</code></strong>=<em><code>0.3</code></em>, <strong><code>rpn_batch_size_per_image</code></strong>=<em><code>256</code></em>, <strong><code>rpn_positive_fraction</code></strong>=<em><code>0.5</code></em>, <strong><code>box_roi_pool</code></strong>=<em><code>None</code></em>, <strong><code>box_head</code></strong>=<em><code>None</code></em>, <strong><code>box_predictor</code></strong>=<em><code>None</code></em>, <strong><code>box_score_thresh</code></strong>=<em><code>0.05</code></em>, <strong><code>box_nms_thresh</code></strong>=<em><code>0.5</code></em>, <strong><code>box_detections_per_img</code></strong>=<em><code>100</code></em>, <strong><code>box_fg_iou_thresh</code></strong>=<em><code>0.5</code></em>, <strong><code>box_bg_iou_thresh</code></strong>=<em><code>0.5</code></em>, <strong><code>box_batch_size_per_image</code></strong>=<em><code>512</code></em>, <strong><code>box_positive_fraction</code></strong>=<em><code>0.25</code></em>, <strong><code>bbox_reg_weights</code></strong>=<em><code>None</code></em>, <strong><code>mask_roi_pool</code></strong>=<em><code>None</code></em>, <strong><code>mask_head</code></strong>=<em><code>None</code></em>, <strong><code>mask_predictor</code></strong>=<em><code>None</code></em>)</p>
 </blockquote>
 
 </div>
@@ -70,277 +78,6 @@ nb_path: "notebooks/04b_models.maskrcnn.ipynb"
     {% raw %}
     
 <div class="cell border-box-sizing code_cell rendered">
-
-</div>
-    {% endraw %}
-
-    {% raw %}
-    
-<div class="cell border-box-sizing code_cell rendered">
-
-</div>
-    {% endraw %}
-
-    {% raw %}
-    
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">maskrcnn_resnet50</span><span class="p">(</span><span class="n">num_classes</span><span class="o">=</span><span class="mi">4</span><span class="p">)</span>
-</pre></div>
-
-    </div>
-</div>
-</div>
-
-<div class="output_wrapper">
-<div class="output">
-
-<div class="output_area">
-
-
-
-<div class="output_text output_subarea output_execute_result">
-<pre>MaskRCNN(
-  (transform): GeneralizedRCNNTransform(
-      Normalize(mean=[0.0, 0.0, 0.0], std=[1.0, 1.0, 1.0])
-      Resize(min_size=(800,), max_size=1333, mode=&#39;bilinear&#39;)
-  )
-  (backbone): BackboneWithFPN(
-    (body): IntermediateLayerGetter(
-      (conv1): Conv2d(3, 64, kernel_size=(7, 7), stride=(2, 2), padding=(3, 3), bias=False)
-      (bn1): FrozenBatchNorm2d(64)
-      (relu): ReLU(inplace=True)
-      (maxpool): MaxPool2d(kernel_size=3, stride=2, padding=1, dilation=1, ceil_mode=False)
-      (layer1): Sequential(
-        (0): Bottleneck(
-          (conv1): Conv2d(64, 64, kernel_size=(1, 1), stride=(1, 1), bias=False)
-          (bn1): FrozenBatchNorm2d(64)
-          (conv2): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
-          (bn2): FrozenBatchNorm2d(64)
-          (conv3): Conv2d(64, 256, kernel_size=(1, 1), stride=(1, 1), bias=False)
-          (bn3): FrozenBatchNorm2d(256)
-          (relu): ReLU(inplace=True)
-          (downsample): Sequential(
-            (0): Conv2d(64, 256, kernel_size=(1, 1), stride=(1, 1), bias=False)
-            (1): FrozenBatchNorm2d(256)
-          )
-        )
-        (1): Bottleneck(
-          (conv1): Conv2d(256, 64, kernel_size=(1, 1), stride=(1, 1), bias=False)
-          (bn1): FrozenBatchNorm2d(64)
-          (conv2): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
-          (bn2): FrozenBatchNorm2d(64)
-          (conv3): Conv2d(64, 256, kernel_size=(1, 1), stride=(1, 1), bias=False)
-          (bn3): FrozenBatchNorm2d(256)
-          (relu): ReLU(inplace=True)
-        )
-        (2): Bottleneck(
-          (conv1): Conv2d(256, 64, kernel_size=(1, 1), stride=(1, 1), bias=False)
-          (bn1): FrozenBatchNorm2d(64)
-          (conv2): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
-          (bn2): FrozenBatchNorm2d(64)
-          (conv3): Conv2d(64, 256, kernel_size=(1, 1), stride=(1, 1), bias=False)
-          (bn3): FrozenBatchNorm2d(256)
-          (relu): ReLU(inplace=True)
-        )
-      )
-      (layer2): Sequential(
-        (0): Bottleneck(
-          (conv1): Conv2d(256, 128, kernel_size=(1, 1), stride=(1, 1), bias=False)
-          (bn1): FrozenBatchNorm2d(128)
-          (conv2): Conv2d(128, 128, kernel_size=(3, 3), stride=(2, 2), padding=(1, 1), bias=False)
-          (bn2): FrozenBatchNorm2d(128)
-          (conv3): Conv2d(128, 512, kernel_size=(1, 1), stride=(1, 1), bias=False)
-          (bn3): FrozenBatchNorm2d(512)
-          (relu): ReLU(inplace=True)
-          (downsample): Sequential(
-            (0): Conv2d(256, 512, kernel_size=(1, 1), stride=(2, 2), bias=False)
-            (1): FrozenBatchNorm2d(512)
-          )
-        )
-        (1): Bottleneck(
-          (conv1): Conv2d(512, 128, kernel_size=(1, 1), stride=(1, 1), bias=False)
-          (bn1): FrozenBatchNorm2d(128)
-          (conv2): Conv2d(128, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
-          (bn2): FrozenBatchNorm2d(128)
-          (conv3): Conv2d(128, 512, kernel_size=(1, 1), stride=(1, 1), bias=False)
-          (bn3): FrozenBatchNorm2d(512)
-          (relu): ReLU(inplace=True)
-        )
-        (2): Bottleneck(
-          (conv1): Conv2d(512, 128, kernel_size=(1, 1), stride=(1, 1), bias=False)
-          (bn1): FrozenBatchNorm2d(128)
-          (conv2): Conv2d(128, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
-          (bn2): FrozenBatchNorm2d(128)
-          (conv3): Conv2d(128, 512, kernel_size=(1, 1), stride=(1, 1), bias=False)
-          (bn3): FrozenBatchNorm2d(512)
-          (relu): ReLU(inplace=True)
-        )
-        (3): Bottleneck(
-          (conv1): Conv2d(512, 128, kernel_size=(1, 1), stride=(1, 1), bias=False)
-          (bn1): FrozenBatchNorm2d(128)
-          (conv2): Conv2d(128, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
-          (bn2): FrozenBatchNorm2d(128)
-          (conv3): Conv2d(128, 512, kernel_size=(1, 1), stride=(1, 1), bias=False)
-          (bn3): FrozenBatchNorm2d(512)
-          (relu): ReLU(inplace=True)
-        )
-      )
-      (layer3): Sequential(
-        (0): Bottleneck(
-          (conv1): Conv2d(512, 256, kernel_size=(1, 1), stride=(1, 1), bias=False)
-          (bn1): FrozenBatchNorm2d(256)
-          (conv2): Conv2d(256, 256, kernel_size=(3, 3), stride=(2, 2), padding=(1, 1), bias=False)
-          (bn2): FrozenBatchNorm2d(256)
-          (conv3): Conv2d(256, 1024, kernel_size=(1, 1), stride=(1, 1), bias=False)
-          (bn3): FrozenBatchNorm2d(1024)
-          (relu): ReLU(inplace=True)
-          (downsample): Sequential(
-            (0): Conv2d(512, 1024, kernel_size=(1, 1), stride=(2, 2), bias=False)
-            (1): FrozenBatchNorm2d(1024)
-          )
-        )
-        (1): Bottleneck(
-          (conv1): Conv2d(1024, 256, kernel_size=(1, 1), stride=(1, 1), bias=False)
-          (bn1): FrozenBatchNorm2d(256)
-          (conv2): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
-          (bn2): FrozenBatchNorm2d(256)
-          (conv3): Conv2d(256, 1024, kernel_size=(1, 1), stride=(1, 1), bias=False)
-          (bn3): FrozenBatchNorm2d(1024)
-          (relu): ReLU(inplace=True)
-        )
-        (2): Bottleneck(
-          (conv1): Conv2d(1024, 256, kernel_size=(1, 1), stride=(1, 1), bias=False)
-          (bn1): FrozenBatchNorm2d(256)
-          (conv2): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
-          (bn2): FrozenBatchNorm2d(256)
-          (conv3): Conv2d(256, 1024, kernel_size=(1, 1), stride=(1, 1), bias=False)
-          (bn3): FrozenBatchNorm2d(1024)
-          (relu): ReLU(inplace=True)
-        )
-        (3): Bottleneck(
-          (conv1): Conv2d(1024, 256, kernel_size=(1, 1), stride=(1, 1), bias=False)
-          (bn1): FrozenBatchNorm2d(256)
-          (conv2): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
-          (bn2): FrozenBatchNorm2d(256)
-          (conv3): Conv2d(256, 1024, kernel_size=(1, 1), stride=(1, 1), bias=False)
-          (bn3): FrozenBatchNorm2d(1024)
-          (relu): ReLU(inplace=True)
-        )
-        (4): Bottleneck(
-          (conv1): Conv2d(1024, 256, kernel_size=(1, 1), stride=(1, 1), bias=False)
-          (bn1): FrozenBatchNorm2d(256)
-          (conv2): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
-          (bn2): FrozenBatchNorm2d(256)
-          (conv3): Conv2d(256, 1024, kernel_size=(1, 1), stride=(1, 1), bias=False)
-          (bn3): FrozenBatchNorm2d(1024)
-          (relu): ReLU(inplace=True)
-        )
-        (5): Bottleneck(
-          (conv1): Conv2d(1024, 256, kernel_size=(1, 1), stride=(1, 1), bias=False)
-          (bn1): FrozenBatchNorm2d(256)
-          (conv2): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
-          (bn2): FrozenBatchNorm2d(256)
-          (conv3): Conv2d(256, 1024, kernel_size=(1, 1), stride=(1, 1), bias=False)
-          (bn3): FrozenBatchNorm2d(1024)
-          (relu): ReLU(inplace=True)
-        )
-      )
-      (layer4): Sequential(
-        (0): Bottleneck(
-          (conv1): Conv2d(1024, 512, kernel_size=(1, 1), stride=(1, 1), bias=False)
-          (bn1): FrozenBatchNorm2d(512)
-          (conv2): Conv2d(512, 512, kernel_size=(3, 3), stride=(2, 2), padding=(1, 1), bias=False)
-          (bn2): FrozenBatchNorm2d(512)
-          (conv3): Conv2d(512, 2048, kernel_size=(1, 1), stride=(1, 1), bias=False)
-          (bn3): FrozenBatchNorm2d(2048)
-          (relu): ReLU(inplace=True)
-          (downsample): Sequential(
-            (0): Conv2d(1024, 2048, kernel_size=(1, 1), stride=(2, 2), bias=False)
-            (1): FrozenBatchNorm2d(2048)
-          )
-        )
-        (1): Bottleneck(
-          (conv1): Conv2d(2048, 512, kernel_size=(1, 1), stride=(1, 1), bias=False)
-          (bn1): FrozenBatchNorm2d(512)
-          (conv2): Conv2d(512, 512, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
-          (bn2): FrozenBatchNorm2d(512)
-          (conv3): Conv2d(512, 2048, kernel_size=(1, 1), stride=(1, 1), bias=False)
-          (bn3): FrozenBatchNorm2d(2048)
-          (relu): ReLU(inplace=True)
-        )
-        (2): Bottleneck(
-          (conv1): Conv2d(2048, 512, kernel_size=(1, 1), stride=(1, 1), bias=False)
-          (bn1): FrozenBatchNorm2d(512)
-          (conv2): Conv2d(512, 512, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
-          (bn2): FrozenBatchNorm2d(512)
-          (conv3): Conv2d(512, 2048, kernel_size=(1, 1), stride=(1, 1), bias=False)
-          (bn3): FrozenBatchNorm2d(2048)
-          (relu): ReLU(inplace=True)
-        )
-      )
-    )
-    (fpn): FeaturePyramidNetwork(
-      (inner_blocks): ModuleList(
-        (0): Conv2d(256, 256, kernel_size=(1, 1), stride=(1, 1))
-        (1): Conv2d(512, 256, kernel_size=(1, 1), stride=(1, 1))
-        (2): Conv2d(1024, 256, kernel_size=(1, 1), stride=(1, 1))
-        (3): Conv2d(2048, 256, kernel_size=(1, 1), stride=(1, 1))
-      )
-      (layer_blocks): ModuleList(
-        (0): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
-        (1): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
-        (2): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
-        (3): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
-      )
-      (extra_blocks): LastLevelMaxPool()
-    )
-  )
-  (rpn): RegionProposalNetwork(
-    (anchor_generator): AnchorGenerator()
-    (head): RPNHead(
-      (conv): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
-      (cls_logits): Conv2d(256, 3, kernel_size=(1, 1), stride=(1, 1))
-      (bbox_pred): Conv2d(256, 12, kernel_size=(1, 1), stride=(1, 1))
-    )
-  )
-  (roi_heads): RoIHeads(
-    (box_roi_pool): MultiScaleRoIAlign()
-    (box_head): TwoMLPHead(
-      (fc6): Linear(in_features=12544, out_features=1024, bias=True)
-      (fc7): Linear(in_features=1024, out_features=1024, bias=True)
-    )
-    (box_predictor): FastRCNNPredictor(
-      (cls_score): Linear(in_features=1024, out_features=4, bias=True)
-      (bbox_pred): Linear(in_features=1024, out_features=16, bias=True)
-    )
-    (mask_roi_pool): MultiScaleRoIAlign()
-    (mask_head): MaskRCNNHeads(
-      (mask_fcn1): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
-      (relu1): ReLU(inplace=True)
-      (mask_fcn2): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
-      (relu2): ReLU(inplace=True)
-      (mask_fcn3): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
-      (relu3): ReLU(inplace=True)
-      (mask_fcn4): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
-      (relu4): ReLU(inplace=True)
-    )
-    (mask_predictor): MaskRCNNPredictor(
-      (conv5_mask): ConvTranspose2d(256, 256, kernel_size=(2, 2), stride=(2, 2))
-      (relu): ReLU(inplace=True)
-      (mask_fcn_logits): Conv2d(256, 4, kernel_size=(1, 1), stride=(1, 1))
-    )
-  )
-)</pre>
-</div>
-
-</div>
-
-</div>
-</div>
 
 </div>
     {% endraw %}
