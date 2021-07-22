@@ -25,7 +25,7 @@ from matplotlib.colors import ListedColormap, Colormap
 class CocoData():
     '''Creates dataset for object detection models by downloading images from coco dataset.
     Specify the name of the dataset and which categories it contains.
-    If data_path is None it creates a new folder in fastai's data path, like untar_data().
+    If data_path is None it creates a new folder in fastai's data path, like `untar_data`.
     By default only bounding boxes, optionally with masks and crowded objects.
     '''
     coco = None

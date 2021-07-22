@@ -66,7 +66,7 @@ nb_path: "notebooks/01_datasets.ipynb"
 </blockquote>
 <p>Creates dataset for object detection models by downloading images from coco dataset.
 Specify the name of the dataset and which categories it contains.
-If data_path is None it creates a new folder in fastai's data path, like untar_data().
+If data_path is None it creates a new folder in fastai's data path, like <code>untar_data</code>.
 By default only bounding boxes, optionally with masks and crowded objects.</p>
 
 </div>
@@ -434,7 +434,7 @@ Creating Dataframe...
 
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">df</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">df</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
 </pre></div>
 
     </div>
@@ -500,42 +500,6 @@ Creating Dataframe...
       <td>39.23</td>
       <td>272.52</td>
       <td>468.65</td>
-      <td>cat</td>
-    </tr>
-    <tr>
-      <th>2</th>
-      <td>157981</td>
-      <td>/home/user/.fastai/data/ds-cats-dogs/images/000000157981.jpg</td>
-      <td>/home/user/.fastai/data/ds-cats-dogs/masks/000000157981_1.png</td>
-      <td>1</td>
-      <td>436.90</td>
-      <td>271.96</td>
-      <td>507.92</td>
-      <td>394.11</td>
-      <td>cat</td>
-    </tr>
-    <tr>
-      <th>3</th>
-      <td>237772</td>
-      <td>/home/user/.fastai/data/ds-cats-dogs/images/000000237772.jpg</td>
-      <td>/home/user/.fastai/data/ds-cats-dogs/masks/000000237772_0.png</td>
-      <td>0</td>
-      <td>241.79</td>
-      <td>302.01</td>
-      <td>348.00</td>
-      <td>366.92</td>
-      <td>cat</td>
-    </tr>
-    <tr>
-      <th>4</th>
-      <td>122913</td>
-      <td>/home/user/.fastai/data/ds-cats-dogs/images/000000122913.jpg</td>
-      <td>/home/user/.fastai/data/ds-cats-dogs/masks/000000122913_0.png</td>
-      <td>0</td>
-      <td>63.09</td>
-      <td>61.50</td>
-      <td>224.02</td>
-      <td>240.00</td>
       <td>cat</td>
     </tr>
   </tbody>

@@ -2,9 +2,9 @@
 
 __all__ = ["index", "modules", "custom_doc_links", "git_url"]
 
-index = {"show_binmask": "00_core.ipynb",
+index = {"BinaryMasksBlock": "00_core.ipynb",
+         "show_binmask": "00_core.ipynb",
          "TensorBinMasks": "00_core.ipynb",
-         "BinaryMasksBlock": "00_core.ipynb",
          "TensorBinMasks2TensorMask": "00_core.ipynb",
          "ObjDetLearner": "00_core.ipynb",
          "InstSegLearner": "00_core.ipynb",
