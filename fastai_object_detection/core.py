@@ -47,29 +47,6 @@ class TensorBinMasks(TensorImageBase):
 
 # Cell
 
-def _bin_mask_stack_and_padding(t, pad_idx=0):
-    "Function for padding to create batches when number of objects is different"
-    stacked_masks = [torch.stack(t[i][1], dim=0) for i in range(len(t))]
-    imgs = [t[i][0] for i in range(len(t))]
-    bboxes = [t[i][2] for i in range(len(t))]
-    labels = [t[i][3] for i in range(len(t))]
-    samples = L(t for t in zip(imgs,stacked_masks,bboxes,labels))
-    samples = [(s[0], *_clip_remove_empty_with_mask(*s[1:])) for s in samples]
-    max_len = max([len(s[3]) for s in samples])
-    def _f(img,bin_mask,bbox,lbl):
-        bin_mask = torch.cat([bin_mask,bin_mask.new_zeros(max_len-bin_mask.shape[0], bin_mask.shape[-2], bin_mask.shape[-1])])
-        bbox = torch.cat([bbox,bbox.new_zeros(max_len-bbox.shape[0], 4)])
-        lbl  = torch.cat([lbl,lbl.new_zeros(max_len-lbl.shape[0])+pad_idx])
-        return img,TensorBinMasks(bin_mask),bbox,lbl
-    return [_f(*s) for s in samples]
-
-def _clip_remove_empty_with_mask(bin_mask, bbox, label):
-    bbox = torch.clamp(bbox, -1, 1)
-    empty = ((bbox[...,2] - bbox[...,0])*(bbox[...,3] - bbox[...,1]) <= 0.)
-    return (bin_mask[~empty], bbox[~empty], label[~empty])
-
-# Cell
-
 class TensorBinMasks2TensorMask(Transform):
     "Class to transform binary masks to fastai's `TensorMask` class to make fastai's transforms available"
     def encodes(self, x:TensorBinMasks):
