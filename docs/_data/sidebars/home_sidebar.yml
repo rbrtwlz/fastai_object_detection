@@ -13,11 +13,11 @@ entries:
       title: Core
       url: core.html
     - output: web,pdf
-      title: Dataloaders
-      url: dataloaders.html
-    - output: web,pdf
       title: Datasets
       url: datasets.html
+    - output: web,pdf
+      title: Dataloaders
+      url: dataloaders.html
     - output: web,pdf
       title: Callbacks
       url: callbacks.html

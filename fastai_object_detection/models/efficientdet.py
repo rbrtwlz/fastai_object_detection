@@ -16,12 +16,13 @@ from ..external.efficientdet_source import FocalLoss, BBoxTransform, ClipBoxes, 
 class EffDetModelWrapper(nn.Module):
     def __init__(self, num_classes, compound_coef=0, pretrained=True, pretrained_backbone=True,
                  nms_score_thresh=0.05, nms_iou_thresh=0.50, ratios='[(1.0,1.0),(1.4,0.7),(0.7,1.4)]',
-                 scales='[2**0, 2**(1.0/3.0), 2**(2.0/3.0)]', focal_loss_alpha=0.25, focal_loss_gamma=2.0, **kwargs):
+                 scales='[2**0, 2**(1.0/3.0), 2**(2.0/3.0)]', focal_loss_alpha=0.25, focal_loss_gamma=2.0,
+                 **kwargs):
+        """Wrapper for EfficientDet model combined with loss function"""
         super().__init__()
         self.criterion = FocalLoss(alpha=focal_loss_alpha, gamma=focal_loss_gamma)
         self.model = EfficientDetBackbone(num_classes=num_classes, compound_coef=compound_coef, ratios=eval(ratios), scales=eval(scales))
         self.model.train()
-
         self.training = True
         self.nms_score_thresh = nms_score_thresh
         self.nms_iou_thresh = nms_iou_thresh
@@ -30,7 +31,6 @@ class EffDetModelWrapper(nn.Module):
         self.device = device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
 
     def forward(self, *x):
-
         imgs, targets = x if len(x)==2 else (x[0], None)
         imgs, targets = self.preprocess(imgs, targets)
         features, regression, classification, anchors = self.model(imgs)
@@ -121,7 +121,10 @@ _effdet_model_urls = {
 
 # Cell
 
-def get_efficientdet_model(num_classes, compound_coef=0, pretrained_backbone=True, pretrained=True, nms_score_thresh=0.05, nms_iou_thresh=0.50 , focal_loss_alpha=0.25, focal_loss_gamma=2.0, **kwargs):
+def get_efficientdet_model(num_classes, compound_coef=0, pretrained_backbone=True, pretrained=True,
+                           nms_score_thresh=0.05, nms_iou_thresh=0.50 ,
+                           focal_loss_alpha=0.25, focal_loss_gamma=2.0, **kwargs):
+    """get_efficientdet_model"""
 
     arch_str = f"efficientdet-d{compound_coef}"
     model = EffDetModelWrapper(num_classes=num_classes, compound_coef=compound_coef, nms_score_thresh=nms_score_thresh, nms_iou_thresh=nms_iou_thresh, focal_loss_alpha=focal_loss_alpha, focal_loss_gamma=focal_loss_gamma, **kwargs)
@@ -139,6 +142,9 @@ def get_efficientdet_model(num_classes, compound_coef=0, pretrained_backbone=Tru
 
     return model
 
+
+
+# Cell
 
 efficientdet_d0 = partial(get_efficientdet_model, compound_coef=0)
 efficientdet_d1 = partial(get_efficientdet_model, compound_coef=1)
