@@ -14,11 +14,11 @@ from torchvision.ops.feature_pyramid_network import FeaturePyramidNetwork
 from torchvision.models.detection import FasterRCNN
 from torchvision.ops.misc import FrozenBatchNorm2d
 from functools import partial
-from fastai.vision.all import default_device
+from fastai.vision.all import default_device, delegates
 from ..external.swin_transformer_source import SwinTransformer
 
 # Cell
-
+#hide
 _model_urls = {
     'fasterrcnn_resnet50_fpn_coco':
         'https://download.pytorch.org/models/fasterrcnn_resnet50_fpn_coco-258fb6c6.pth',
@@ -35,7 +35,7 @@ _model_urls = {
 }
 
 # Cell
-
+@delegates(FasterRCNN)
 def get_fasterrcnn_model(arch_str, num_classes, pretrained=True, pretrained_backbone=True,
                    trainable_layers=5, **kwargs):
 
@@ -85,7 +85,7 @@ def get_fasterrcnn_model(arch_str, num_classes, pretrained=True, pretrained_back
 
 # Cell
 
-
+@delegates(FasterRCNN)
 def get_fasterrcnn_model_swin(arch_str, num_classes, pretrained=False, pretrained_backbone=True, **kwargs):
     anchor_sizes = ((32,), (64,), (128,), (256,),)
     aspect_ratios = ((0.5, 1.0, 2.0),) * len(anchor_sizes)
@@ -151,6 +151,7 @@ class SwinTransformerFPN(nn.Module):
 
 
 # Cell
+#hide
 fasterrcnn_resnet18 = partial(get_fasterrcnn_model, arch_str="resnet18")
 fasterrcnn_resnet34 = partial(get_fasterrcnn_model, arch_str="resnet34")
 fasterrcnn_resnet50 = partial(get_fasterrcnn_model, arch_str="resnet50")
