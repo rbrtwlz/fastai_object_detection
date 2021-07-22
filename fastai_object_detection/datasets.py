@@ -32,7 +32,8 @@ class CocoData():
 
     @classmethod
     def create(cls, ds_name, cat_list, data_path=None, with_mask=False, max_images=1000, remove_crowded=True):
-        """Creates a new coco dataset with categories defined in cat_list"""
+        """Creates a new coco dataset with categories defined in cat_list, optionally with or without masks.
+        You can specify the path, where the dataset gets stored, by default it uses fastai's data path like `untar_data`"""
 
         path = Path(URLs.path(c_key='data'))/ds_name if data_path is None else Path(data_path)/ds_name
         path_images = path/"images"
