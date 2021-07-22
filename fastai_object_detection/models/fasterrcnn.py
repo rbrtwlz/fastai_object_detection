@@ -38,7 +38,7 @@ _model_urls = {
 @delegates(FasterRCNN)
 def get_fasterrcnn_model(arch_str, num_classes, pretrained=True, pretrained_backbone=True,
                    trainable_layers=5, **kwargs):
-    """get_fasterrcnn_model"""
+    """Creates FasterRCNN model with resnet backbone"""
 
     #if pretrained == True: pretrained_backbone=False
 
@@ -88,7 +88,7 @@ def get_fasterrcnn_model(arch_str, num_classes, pretrained=True, pretrained_back
 
 @delegates(FasterRCNN)
 def get_fasterrcnn_model_swin(arch_str, num_classes, pretrained=False, pretrained_backbone=True, **kwargs):
-    """get_fasterrcnn_model_swin"""
+    """Creates FasterRCNN model with swin transformer backbone"""
     anchor_sizes = ((32,), (64,), (128,), (256,),)
     aspect_ratios = ((0.5, 1.0, 2.0),) * len(anchor_sizes)
     anchor_generator = AnchorGenerator(sizes=anchor_sizes, aspect_ratios=aspect_ratios)
@@ -133,9 +133,11 @@ def get_fasterrcnn_model_swin(arch_str, num_classes, pretrained=False, pretraine
     return model.train()
 
 # Cell
+#hide
 
 class SwinTransformerFPN(nn.Module):
-    def __init__(self, img_size=224, window_size=7, embed_dim=96, depths=[2, 2, 6, 2], fpn_cin=[96, 192, 384, 768], fpn_cout=256):
+    def __init__(self, img_size=224, window_size=7, embed_dim=96,
+                 depths=[2, 2, 6, 2], fpn_cin=[96, 192, 384, 768], fpn_cout=256):
         """SwinTransformer backbone with feature pyramid network."""
         super().__init__()
         self.body = SwinTransformer(pretrain_img_size=img_size, patch_size=4, in_chans=3,
