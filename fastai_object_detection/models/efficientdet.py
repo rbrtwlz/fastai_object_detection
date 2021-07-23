@@ -5,7 +5,7 @@ __all__ = ['EffDetModelWrapper', 'get_efficientdet_model', 'efficientdet_d0', 'e
 
 # Cell
 import torch
-import torch.nn as nn
+from torch.nn import Module
 from torchvision.ops.boxes import batched_nms
 from torchvision.models.utils import load_state_dict_from_url
 from functools import partial
@@ -14,7 +14,7 @@ from ..external.efficientdet_source import FocalLoss, BBoxTransform, ClipBoxes, 
 
 # Cell
 
-class EffDetModelWrapper(nn.Module):
+class EffDetModelWrapper(Module):
     def __init__(self, num_classes, compound_coef=0, pretrained=True, pretrained_backbone=True,
                  nms_score_thresh=0.05, nms_iou_thresh=0.50, ratios='[(1.0,1.0),(1.4,0.7),(0.7,1.4)]',
                  scales='[2**0, 2**(1.0/3.0), 2**(2.0/3.0)]', focal_loss_alpha=0.25, focal_loss_gamma=2.0,
