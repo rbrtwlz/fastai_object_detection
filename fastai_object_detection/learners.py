@@ -8,9 +8,10 @@ __all__ = ['no_split', 'rcnn_split', 'effdet_split', 'ObjDetLearner', 'InstSegLe
 from fastai.vision.all import *
 from fastprogress.fastprogress import progress_bar
 from .callbacks import *
-from .models.fasterrcnn import get_fasterrcnn_model
-from .models.maskrcnn import get_maskrcnn_model
-from .models.efficientdet import get_efficientdet_model
+from .models.fasterrcnn import *
+from .models.maskrcnn import *
+from .models.efficientdet import *
+from .metrics import *
 
 # Cell
 

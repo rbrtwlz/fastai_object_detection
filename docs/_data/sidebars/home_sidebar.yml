@@ -21,6 +21,16 @@ entries:
     - output: web,pdf
       title: Callbacks
       url: callbacks.html
+      subfolders:
+      - output: web
+        subfolderitems:
+        - output: web,pdf
+          title: FasterRCNN
+          url: models.fasterrcnn.html
+        - output: web,pdf
+          title: MaskRCNN
+          url: model.maskrcnn.html
+        title: Models
     - output: web,pdf
       title: Models
       url: models.html

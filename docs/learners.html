@@ -51,6 +51,23 @@ nb_path: "notebooks/05_learners.ipynb"
 </div>
     {% endraw %}
 
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span> 
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    {% endraw %}
+
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <h2 id="Splitters">Splitters<a class="anchor-link" href="#Splitters"> </a></h2><p>Splitters for spliting the model into head and body for freezing and differential learning rates.</p>
@@ -69,7 +86,7 @@ nb_path: "notebooks/05_learners.ipynb"
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="no_split" class="doc_header"><code>no_split</code><a href="https://github.com/rbrtwlz/fastai_object_detection/tree/master/fastai_object_detection/learners.py#L17" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>no_split</code>(<strong><code>m</code></strong>)</p>
+<h4 id="no_split" class="doc_header"><code>no_split</code><a href="https://github.com/rbrtwlz/fastai_object_detection/tree/master/fastai_object_detection/learners.py#L18" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>no_split</code>(<strong><code>m</code></strong>)</p>
 </blockquote>
 <p>No split of params for models</p>
 
@@ -94,7 +111,7 @@ nb_path: "notebooks/05_learners.ipynb"
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="rcnn_split" class="doc_header"><code>rcnn_split</code><a href="https://github.com/rbrtwlz/fastai_object_detection/tree/master/fastai_object_detection/learners.py#L21" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>rcnn_split</code>(<strong><code>m</code></strong>)</p>
+<h4 id="rcnn_split" class="doc_header"><code>rcnn_split</code><a href="https://github.com/rbrtwlz/fastai_object_detection/tree/master/fastai_object_detection/learners.py#L22" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>rcnn_split</code>(<strong><code>m</code></strong>)</p>
 </blockquote>
 <p>Default split of params for fasterrcnn/maskrcnn models</p>
 
@@ -119,7 +136,7 @@ nb_path: "notebooks/05_learners.ipynb"
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="effdet_split" class="doc_header"><code>effdet_split</code><a href="https://github.com/rbrtwlz/fastai_object_detection/tree/master/fastai_object_detection/learners.py#L28" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>effdet_split</code>(<strong><code>m</code></strong>)</p>
+<h4 id="effdet_split" class="doc_header"><code>effdet_split</code><a href="https://github.com/rbrtwlz/fastai_object_detection/tree/master/fastai_object_detection/learners.py#L29" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>effdet_split</code>(<strong><code>m</code></strong>)</p>
 </blockquote>
 <p>Default split of params for efficientdet models</p>
 
@@ -151,7 +168,7 @@ nb_path: "notebooks/05_learners.ipynb"
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h2 id="ObjDetLearner" class="doc_header"><code>class</code> <code>ObjDetLearner</code><a href="https://github.com/rbrtwlz/fastai_object_detection/tree/master/fastai_object_detection/learners.py#L39" class="source_link" style="float:right">[source]</a></h2><blockquote><p><code>ObjDetLearner</code>(<strong><code>dls</code></strong>, <strong><code>model</code></strong>, <strong><code>loss_func</code></strong>=<em><code>None</code></em>, <strong><code>opt_func</code></strong>=<em><code>Adam</code></em>, <strong><code>lr</code></strong>=<em><code>0.001</code></em>, <strong><code>splitter</code></strong>=<em><code>trainable_params</code></em>, <strong><code>cbs</code></strong>=<em><code>None</code></em>, <strong><code>metrics</code></strong>=<em><code>None</code></em>, <strong><code>path</code></strong>=<em><code>None</code></em>, <strong><code>model_dir</code></strong>=<em><code>'models'</code></em>, <strong><code>wd</code></strong>=<em><code>None</code></em>, <strong><code>wd_bn_bias</code></strong>=<em><code>False</code></em>, <strong><code>train_bn</code></strong>=<em><code>True</code></em>, <strong><code>moms</code></strong>=<em><code>(0.95, 0.85, 0.95)</code></em>) :: <code>Learner</code></p>
+<h2 id="ObjDetLearner" class="doc_header"><code>class</code> <code>ObjDetLearner</code><a href="https://github.com/rbrtwlz/fastai_object_detection/tree/master/fastai_object_detection/learners.py#L40" class="source_link" style="float:right">[source]</a></h2><blockquote><p><code>ObjDetLearner</code>(<strong><code>dls</code></strong>, <strong><code>model</code></strong>, <strong><code>loss_func</code></strong>=<em><code>None</code></em>, <strong><code>opt_func</code></strong>=<em><code>Adam</code></em>, <strong><code>lr</code></strong>=<em><code>0.001</code></em>, <strong><code>splitter</code></strong>=<em><code>trainable_params</code></em>, <strong><code>cbs</code></strong>=<em><code>None</code></em>, <strong><code>metrics</code></strong>=<em><code>None</code></em>, <strong><code>path</code></strong>=<em><code>None</code></em>, <strong><code>model_dir</code></strong>=<em><code>'models'</code></em>, <strong><code>wd</code></strong>=<em><code>None</code></em>, <strong><code>wd_bn_bias</code></strong>=<em><code>False</code></em>, <strong><code>train_bn</code></strong>=<em><code>True</code></em>, <strong><code>moms</code></strong>=<em><code>(0.95, 0.85, 0.95)</code></em>) :: <code>Learner</code></p>
 </blockquote>
 <p>Group together a <code>model</code>, some <code>dls</code> and a <code>loss_func</code> to handle training</p>
 
@@ -183,7 +200,7 @@ nb_path: "notebooks/05_learners.ipynb"
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="ObjDetLearner.get_preds" class="doc_header"><code>ObjDetLearner.get_preds</code><a href="https://github.com/rbrtwlz/fastai_object_detection/tree/master/fastai_object_detection/learners.py#L43" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>ObjDetLearner.get_preds</code>(<strong><code>x</code></strong>:<a href="/fastai_object_detection/learners.html#ObjDetLearner"><code>ObjDetLearner</code></a>, <strong><code>items</code></strong>=<em><code>None</code></em>, <strong><code>item_tfms</code></strong>=<em><code>None</code></em>, <strong><code>batch_tfms</code></strong>=<em><code>None</code></em>, <strong><code>box_score_thresh</code></strong>=<em><code>0.05</code></em>, <strong><code>max_n</code></strong>=<em><code>None</code></em>, <strong><code>progress</code></strong>=<em><code>True</code></em>)</p>
+<h4 id="ObjDetLearner.get_preds" class="doc_header"><code>ObjDetLearner.get_preds</code><a href="https://github.com/rbrtwlz/fastai_object_detection/tree/master/fastai_object_detection/learners.py#L44" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>ObjDetLearner.get_preds</code>(<strong><code>x</code></strong>:<a href="/fastai_object_detection/learners.html#ObjDetLearner"><code>ObjDetLearner</code></a>, <strong><code>items</code></strong>=<em><code>None</code></em>, <strong><code>item_tfms</code></strong>=<em><code>None</code></em>, <strong><code>batch_tfms</code></strong>=<em><code>None</code></em>, <strong><code>box_score_thresh</code></strong>=<em><code>0.05</code></em>, <strong><code>max_n</code></strong>=<em><code>None</code></em>, <strong><code>progress</code></strong>=<em><code>True</code></em>)</p>
 </blockquote>
 <p>Get the predictions and targets on the <code>ds_idx</code>-th dbunchset or <code>dl</code>, optionally <code>with_input</code> and <code>with_loss</code></p>
 
@@ -208,7 +225,7 @@ nb_path: "notebooks/05_learners.ipynb"
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="ObjDetLearner.show_results" class="doc_header"><code>ObjDetLearner.show_results</code><a href="https://github.com/rbrtwlz/fastai_object_detection/tree/master/fastai_object_detection/learners.py#L92" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>ObjDetLearner.show_results</code>(<strong><code>x</code></strong>:<a href="/fastai_object_detection/learners.html#ObjDetLearner"><code>ObjDetLearner</code></a>, <strong><code>items</code></strong>=<em><code>None</code></em>, <strong><code>item_tfms</code></strong>=<em><code>None</code></em>, <strong><code>batch_tfms</code></strong>=<em><code>None</code></em>, <strong><code>box_score_thresh</code></strong>=<em><code>0.5</code></em>, <strong><code>max_n</code></strong>=<em><code>None</code></em>, <strong><code>progress</code></strong>=<em><code>False</code></em>)</p>
+<h4 id="ObjDetLearner.show_results" class="doc_header"><code>ObjDetLearner.show_results</code><a href="https://github.com/rbrtwlz/fastai_object_detection/tree/master/fastai_object_detection/learners.py#L93" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>ObjDetLearner.show_results</code>(<strong><code>x</code></strong>:<a href="/fastai_object_detection/learners.html#ObjDetLearner"><code>ObjDetLearner</code></a>, <strong><code>items</code></strong>=<em><code>None</code></em>, <strong><code>item_tfms</code></strong>=<em><code>None</code></em>, <strong><code>batch_tfms</code></strong>=<em><code>None</code></em>, <strong><code>box_score_thresh</code></strong>=<em><code>0.5</code></em>, <strong><code>max_n</code></strong>=<em><code>None</code></em>, <strong><code>progress</code></strong>=<em><code>False</code></em>)</p>
 </blockquote>
 <p>Show some predictions on <code>ds_idx</code>-th dataset or <code>dl</code></p>
 
@@ -240,7 +257,7 @@ nb_path: "notebooks/05_learners.ipynb"
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h2 id="InstSegLearner" class="doc_header"><code>class</code> <code>InstSegLearner</code><a href="https://github.com/rbrtwlz/fastai_object_detection/tree/master/fastai_object_detection/learners.py#L108" class="source_link" style="float:right">[source]</a></h2><blockquote><p><code>InstSegLearner</code>(<strong><code>dls</code></strong>, <strong><code>model</code></strong>, <strong><code>loss_func</code></strong>=<em><code>None</code></em>, <strong><code>opt_func</code></strong>=<em><code>Adam</code></em>, <strong><code>lr</code></strong>=<em><code>0.001</code></em>, <strong><code>splitter</code></strong>=<em><code>trainable_params</code></em>, <strong><code>cbs</code></strong>=<em><code>None</code></em>, <strong><code>metrics</code></strong>=<em><code>None</code></em>, <strong><code>path</code></strong>=<em><code>None</code></em>, <strong><code>model_dir</code></strong>=<em><code>'models'</code></em>, <strong><code>wd</code></strong>=<em><code>None</code></em>, <strong><code>wd_bn_bias</code></strong>=<em><code>False</code></em>, <strong><code>train_bn</code></strong>=<em><code>True</code></em>, <strong><code>moms</code></strong>=<em><code>(0.95, 0.85, 0.95)</code></em>) :: <code>Learner</code></p>
+<h2 id="InstSegLearner" class="doc_header"><code>class</code> <code>InstSegLearner</code><a href="https://github.com/rbrtwlz/fastai_object_detection/tree/master/fastai_object_detection/learners.py#L109" class="source_link" style="float:right">[source]</a></h2><blockquote><p><code>InstSegLearner</code>(<strong><code>dls</code></strong>, <strong><code>model</code></strong>, <strong><code>loss_func</code></strong>=<em><code>None</code></em>, <strong><code>opt_func</code></strong>=<em><code>Adam</code></em>, <strong><code>lr</code></strong>=<em><code>0.001</code></em>, <strong><code>splitter</code></strong>=<em><code>trainable_params</code></em>, <strong><code>cbs</code></strong>=<em><code>None</code></em>, <strong><code>metrics</code></strong>=<em><code>None</code></em>, <strong><code>path</code></strong>=<em><code>None</code></em>, <strong><code>model_dir</code></strong>=<em><code>'models'</code></em>, <strong><code>wd</code></strong>=<em><code>None</code></em>, <strong><code>wd_bn_bias</code></strong>=<em><code>False</code></em>, <strong><code>train_bn</code></strong>=<em><code>True</code></em>, <strong><code>moms</code></strong>=<em><code>(0.95, 0.85, 0.95)</code></em>) :: <code>Learner</code></p>
 </blockquote>
 <p>Group together a <code>model</code>, some <code>dls</code> and a <code>loss_func</code> to handle training</p>
 
@@ -272,7 +289,7 @@ nb_path: "notebooks/05_learners.ipynb"
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="InstSegLearner.get_preds" class="doc_header"><code>InstSegLearner.get_preds</code><a href="https://github.com/rbrtwlz/fastai_object_detection/tree/master/fastai_object_detection/learners.py#L112" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>InstSegLearner.get_preds</code>(<strong><code>x</code></strong>:<a href="/fastai_object_detection/learners.html#InstSegLearner"><code>InstSegLearner</code></a>, <strong><code>items</code></strong>, <strong><code>item_tfms</code></strong>=<em><code>None</code></em>, <strong><code>batch_tfms</code></strong>=<em><code>None</code></em>, <strong><code>box_score_thresh</code></strong>=<em><code>0.05</code></em>, <strong><code>bin_mask_thresh</code></strong>=<em><code>None</code></em>)</p>
+<h4 id="InstSegLearner.get_preds" class="doc_header"><code>InstSegLearner.get_preds</code><a href="https://github.com/rbrtwlz/fastai_object_detection/tree/master/fastai_object_detection/learners.py#L113" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>InstSegLearner.get_preds</code>(<strong><code>x</code></strong>:<a href="/fastai_object_detection/learners.html#InstSegLearner"><code>InstSegLearner</code></a>, <strong><code>items</code></strong>, <strong><code>item_tfms</code></strong>=<em><code>None</code></em>, <strong><code>batch_tfms</code></strong>=<em><code>None</code></em>, <strong><code>box_score_thresh</code></strong>=<em><code>0.05</code></em>, <strong><code>bin_mask_thresh</code></strong>=<em><code>None</code></em>)</p>
 </blockquote>
 <p>Get the predictions and targets on the <code>ds_idx</code>-th dbunchset or <code>dl</code>, optionally <code>with_input</code> and <code>with_loss</code></p>
 
@@ -297,7 +314,7 @@ nb_path: "notebooks/05_learners.ipynb"
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="InstSegLearner.show_results" class="doc_header"><code>InstSegLearner.show_results</code><a href="https://github.com/rbrtwlz/fastai_object_detection/tree/master/fastai_object_detection/learners.py#L159" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>InstSegLearner.show_results</code>(<strong><code>x</code></strong>:<a href="/fastai_object_detection/learners.html#InstSegLearner"><code>InstSegLearner</code></a>, <strong><code>items</code></strong>, <strong><code>max_n</code></strong>=<em><code>9</code></em>, <strong><code>box_score_thresh</code></strong>=<em><code>0.6</code></em>, <strong><code>bin_mask_thresh</code></strong>=<em><code>0.5</code></em>, <strong>**<code>kwargs</code></strong>)</p>
+<h4 id="InstSegLearner.show_results" class="doc_header"><code>InstSegLearner.show_results</code><a href="https://github.com/rbrtwlz/fastai_object_detection/tree/master/fastai_object_detection/learners.py#L160" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>InstSegLearner.show_results</code>(<strong><code>x</code></strong>:<a href="/fastai_object_detection/learners.html#InstSegLearner"><code>InstSegLearner</code></a>, <strong><code>items</code></strong>, <strong><code>max_n</code></strong>=<em><code>9</code></em>, <strong><code>box_score_thresh</code></strong>=<em><code>0.6</code></em>, <strong><code>bin_mask_thresh</code></strong>=<em><code>0.5</code></em>, <strong>**<code>kwargs</code></strong>)</p>
 </blockquote>
 <p>Show some predictions on <code>ds_idx</code>-th dataset or <code>dl</code></p>
 
@@ -329,7 +346,7 @@ nb_path: "notebooks/05_learners.ipynb"
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h2 id="fasterrcnn_learner" class="doc_header"><code>class</code> <code>fasterrcnn_learner</code><a href="https://github.com/rbrtwlz/fastai_object_detection/tree/master/fastai_object_detection/learners.py#L181" class="source_link" style="float:right">[source]</a></h2><blockquote><p><code>fasterrcnn_learner</code>(<strong><code>dls</code></strong>, <strong><code>model</code></strong>, <strong><code>pretrained</code></strong>=<em><code>True</code></em>, <strong><code>pretrained_backbone</code></strong>=<em><code>True</code></em>, <strong><code>num_classes</code></strong>=<em><code>None</code></em>, <strong><code>loss_func</code></strong>=<em><code>noop</code></em>, <strong><code>opt_func</code></strong>=<em><code>Adam</code></em>, <strong><code>lr</code></strong>=<em><code>0.001</code></em>, <strong><code>splitter</code></strong>=<em><code>None</code></em>, <strong><code>cbs</code></strong>=<em><code>None</code></em>, <strong><code>metrics</code></strong>=<em><code>None</code></em>, <strong><code>path</code></strong>=<em><code>None</code></em>, <strong><code>model_dir</code></strong>=<em><code>'models'</code></em>, <strong><code>wd</code></strong>=<em><code>None</code></em>, <strong><code>wd_bn_bias</code></strong>=<em><code>False</code></em>, <strong><code>train_bn</code></strong>=<em><code>True</code></em>, <strong><code>moms</code></strong>=<em><code>(0.95, 0.85, 0.95)</code></em>, <strong><code>trainable_layers</code></strong>=<em><code>5</code></em>, <strong><code>min_size</code></strong>=<em><code>800</code></em>, <strong><code>max_size</code></strong>=<em><code>1333</code></em>, <strong><code>image_mean</code></strong>=<em><code>None</code></em>, <strong><code>image_std</code></strong>=<em><code>None</code></em>, <strong><code>rpn_anchor_generator</code></strong>=<em><code>None</code></em>, <strong><code>rpn_head</code></strong>=<em><code>None</code></em>, <strong><code>rpn_pre_nms_top_n_train</code></strong>=<em><code>2000</code></em>, <strong><code>rpn_pre_nms_top_n_test</code></strong>=<em><code>1000</code></em>, <strong><code>rpn_post_nms_top_n_train</code></strong>=<em><code>2000</code></em>, <strong><code>rpn_post_nms_top_n_test</code></strong>=<em><code>1000</code></em>, <strong><code>rpn_nms_thresh</code></strong>=<em><code>0.7</code></em>, <strong><code>rpn_fg_iou_thresh</code></strong>=<em><code>0.7</code></em>, <strong><code>rpn_bg_iou_thresh</code></strong>=<em><code>0.3</code></em>, <strong><code>rpn_batch_size_per_image</code></strong>=<em><code>256</code></em>, <strong><code>rpn_positive_fraction</code></strong>=<em><code>0.5</code></em>, <strong><code>box_roi_pool</code></strong>=<em><code>None</code></em>, <strong><code>box_head</code></strong>=<em><code>None</code></em>, <strong><code>box_predictor</code></strong>=<em><code>None</code></em>, <strong><code>box_score_thresh</code></strong>=<em><code>0.05</code></em>, <strong><code>box_nms_thresh</code></strong>=<em><code>0.5</code></em>, <strong><code>box_detections_per_img</code></strong>=<em><code>100</code></em>, <strong><code>box_fg_iou_thresh</code></strong>=<em><code>0.5</code></em>, <strong><code>box_bg_iou_thresh</code></strong>=<em><code>0.5</code></em>, <strong><code>box_batch_size_per_image</code></strong>=<em><code>512</code></em>, <strong><code>box_positive_fraction</code></strong>=<em><code>0.25</code></em>, <strong><code>bbox_reg_weights</code></strong>=<em><code>None</code></em>) :: <a href="/fastai_object_detection/learners.html#ObjDetLearner"><code>ObjDetLearner</code></a></p>
+<h2 id="fasterrcnn_learner" class="doc_header"><code>class</code> <code>fasterrcnn_learner</code><a href="https://github.com/rbrtwlz/fastai_object_detection/tree/master/fastai_object_detection/learners.py#L182" class="source_link" style="float:right">[source]</a></h2><blockquote><p><code>fasterrcnn_learner</code>(<strong><code>dls</code></strong>, <strong><code>model</code></strong>, <strong><code>pretrained</code></strong>=<em><code>True</code></em>, <strong><code>pretrained_backbone</code></strong>=<em><code>True</code></em>, <strong><code>num_classes</code></strong>=<em><code>None</code></em>, <strong><code>loss_func</code></strong>=<em><code>noop</code></em>, <strong><code>opt_func</code></strong>=<em><code>Adam</code></em>, <strong><code>lr</code></strong>=<em><code>0.001</code></em>, <strong><code>splitter</code></strong>=<em><code>None</code></em>, <strong><code>cbs</code></strong>=<em><code>None</code></em>, <strong><code>metrics</code></strong>=<em><code>None</code></em>, <strong><code>path</code></strong>=<em><code>None</code></em>, <strong><code>model_dir</code></strong>=<em><code>'models'</code></em>, <strong><code>wd</code></strong>=<em><code>None</code></em>, <strong><code>wd_bn_bias</code></strong>=<em><code>False</code></em>, <strong><code>train_bn</code></strong>=<em><code>True</code></em>, <strong><code>moms</code></strong>=<em><code>(0.95, 0.85, 0.95)</code></em>, <strong><code>trainable_layers</code></strong>=<em><code>5</code></em>, <strong><code>min_size</code></strong>=<em><code>800</code></em>, <strong><code>max_size</code></strong>=<em><code>1333</code></em>, <strong><code>image_mean</code></strong>=<em><code>None</code></em>, <strong><code>image_std</code></strong>=<em><code>None</code></em>, <strong><code>rpn_anchor_generator</code></strong>=<em><code>None</code></em>, <strong><code>rpn_head</code></strong>=<em><code>None</code></em>, <strong><code>rpn_pre_nms_top_n_train</code></strong>=<em><code>2000</code></em>, <strong><code>rpn_pre_nms_top_n_test</code></strong>=<em><code>1000</code></em>, <strong><code>rpn_post_nms_top_n_train</code></strong>=<em><code>2000</code></em>, <strong><code>rpn_post_nms_top_n_test</code></strong>=<em><code>1000</code></em>, <strong><code>rpn_nms_thresh</code></strong>=<em><code>0.7</code></em>, <strong><code>rpn_fg_iou_thresh</code></strong>=<em><code>0.7</code></em>, <strong><code>rpn_bg_iou_thresh</code></strong>=<em><code>0.3</code></em>, <strong><code>rpn_batch_size_per_image</code></strong>=<em><code>256</code></em>, <strong><code>rpn_positive_fraction</code></strong>=<em><code>0.5</code></em>, <strong><code>box_roi_pool</code></strong>=<em><code>None</code></em>, <strong><code>box_head</code></strong>=<em><code>None</code></em>, <strong><code>box_predictor</code></strong>=<em><code>None</code></em>, <strong><code>box_score_thresh</code></strong>=<em><code>0.05</code></em>, <strong><code>box_nms_thresh</code></strong>=<em><code>0.5</code></em>, <strong><code>box_detections_per_img</code></strong>=<em><code>100</code></em>, <strong><code>box_fg_iou_thresh</code></strong>=<em><code>0.5</code></em>, <strong><code>box_bg_iou_thresh</code></strong>=<em><code>0.5</code></em>, <strong><code>box_batch_size_per_image</code></strong>=<em><code>512</code></em>, <strong><code>box_positive_fraction</code></strong>=<em><code>0.25</code></em>, <strong><code>bbox_reg_weights</code></strong>=<em><code>None</code></em>) :: <a href="/fastai_object_detection/learners.html#ObjDetLearner"><code>ObjDetLearner</code></a></p>
 </blockquote>
 <p>fastai-style learner to train fasterrcnn models</p>
 
@@ -361,7 +378,7 @@ nb_path: "notebooks/05_learners.ipynb"
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h2 id="maskrcnn_learner" class="doc_header"><code>class</code> <code>maskrcnn_learner</code><a href="https://github.com/rbrtwlz/fastai_object_detection/tree/master/fastai_object_detection/learners.py#L204" class="source_link" style="float:right">[source]</a></h2><blockquote><p><code>maskrcnn_learner</code>(<strong><code>dls</code></strong>, <strong><code>model</code></strong>, <strong><code>pretrained</code></strong>=<em><code>True</code></em>, <strong><code>pretrained_backbone</code></strong>=<em><code>True</code></em>, <strong><code>num_classes</code></strong>=<em><code>None</code></em>, <strong><code>loss_func</code></strong>=<em><code>noop</code></em>, <strong><code>opt_func</code></strong>=<em><code>Adam</code></em>, <strong><code>lr</code></strong>=<em><code>0.001</code></em>, <strong><code>splitter</code></strong>=<em><code>None</code></em>, <strong><code>cbs</code></strong>=<em><code>None</code></em>, <strong><code>metrics</code></strong>=<em><code>None</code></em>, <strong><code>path</code></strong>=<em><code>None</code></em>, <strong><code>model_dir</code></strong>=<em><code>'models'</code></em>, <strong><code>wd</code></strong>=<em><code>None</code></em>, <strong><code>wd_bn_bias</code></strong>=<em><code>False</code></em>, <strong><code>train_bn</code></strong>=<em><code>True</code></em>, <strong><code>moms</code></strong>=<em><code>(0.95, 0.85, 0.95)</code></em>, <strong><code>trainable_layers</code></strong>=<em><code>5</code></em>, <strong><code>min_size</code></strong>=<em><code>800</code></em>, <strong><code>max_size</code></strong>=<em><code>1333</code></em>, <strong><code>image_mean</code></strong>=<em><code>None</code></em>, <strong><code>image_std</code></strong>=<em><code>None</code></em>, <strong><code>rpn_anchor_generator</code></strong>=<em><code>None</code></em>, <strong><code>rpn_head</code></strong>=<em><code>None</code></em>, <strong><code>rpn_pre_nms_top_n_train</code></strong>=<em><code>2000</code></em>, <strong><code>rpn_pre_nms_top_n_test</code></strong>=<em><code>1000</code></em>, <strong><code>rpn_post_nms_top_n_train</code></strong>=<em><code>2000</code></em>, <strong><code>rpn_post_nms_top_n_test</code></strong>=<em><code>1000</code></em>, <strong><code>rpn_nms_thresh</code></strong>=<em><code>0.7</code></em>, <strong><code>rpn_fg_iou_thresh</code></strong>=<em><code>0.7</code></em>, <strong><code>rpn_bg_iou_thresh</code></strong>=<em><code>0.3</code></em>, <strong><code>rpn_batch_size_per_image</code></strong>=<em><code>256</code></em>, <strong><code>rpn_positive_fraction</code></strong>=<em><code>0.5</code></em>, <strong><code>box_roi_pool</code></strong>=<em><code>None</code></em>, <strong><code>box_head</code></strong>=<em><code>None</code></em>, <strong><code>box_predictor</code></strong>=<em><code>None</code></em>, <strong><code>box_score_thresh</code></strong>=<em><code>0.05</code></em>, <strong><code>box_nms_thresh</code></strong>=<em><code>0.5</code></em>, <strong><code>box_detections_per_img</code></strong>=<em><code>100</code></em>, <strong><code>box_fg_iou_thresh</code></strong>=<em><code>0.5</code></em>, <strong><code>box_bg_iou_thresh</code></strong>=<em><code>0.5</code></em>, <strong><code>box_batch_size_per_image</code></strong>=<em><code>512</code></em>, <strong><code>box_positive_fraction</code></strong>=<em><code>0.25</code></em>, <strong><code>bbox_reg_weights</code></strong>=<em><code>None</code></em>, <strong><code>mask_roi_pool</code></strong>=<em><code>None</code></em>, <strong><code>mask_head</code></strong>=<em><code>None</code></em>, <strong><code>mask_predictor</code></strong>=<em><code>None</code></em>) :: <a href="/fastai_object_detection/learners.html#InstSegLearner"><code>InstSegLearner</code></a></p>
+<h2 id="maskrcnn_learner" class="doc_header"><code>class</code> <code>maskrcnn_learner</code><a href="https://github.com/rbrtwlz/fastai_object_detection/tree/master/fastai_object_detection/learners.py#L205" class="source_link" style="float:right">[source]</a></h2><blockquote><p><code>maskrcnn_learner</code>(<strong><code>dls</code></strong>, <strong><code>model</code></strong>, <strong><code>pretrained</code></strong>=<em><code>True</code></em>, <strong><code>pretrained_backbone</code></strong>=<em><code>True</code></em>, <strong><code>num_classes</code></strong>=<em><code>None</code></em>, <strong><code>loss_func</code></strong>=<em><code>noop</code></em>, <strong><code>opt_func</code></strong>=<em><code>Adam</code></em>, <strong><code>lr</code></strong>=<em><code>0.001</code></em>, <strong><code>splitter</code></strong>=<em><code>None</code></em>, <strong><code>cbs</code></strong>=<em><code>None</code></em>, <strong><code>metrics</code></strong>=<em><code>None</code></em>, <strong><code>path</code></strong>=<em><code>None</code></em>, <strong><code>model_dir</code></strong>=<em><code>'models'</code></em>, <strong><code>wd</code></strong>=<em><code>None</code></em>, <strong><code>wd_bn_bias</code></strong>=<em><code>False</code></em>, <strong><code>train_bn</code></strong>=<em><code>True</code></em>, <strong><code>moms</code></strong>=<em><code>(0.95, 0.85, 0.95)</code></em>, <strong><code>trainable_layers</code></strong>=<em><code>5</code></em>, <strong><code>min_size</code></strong>=<em><code>800</code></em>, <strong><code>max_size</code></strong>=<em><code>1333</code></em>, <strong><code>image_mean</code></strong>=<em><code>None</code></em>, <strong><code>image_std</code></strong>=<em><code>None</code></em>, <strong><code>rpn_anchor_generator</code></strong>=<em><code>None</code></em>, <strong><code>rpn_head</code></strong>=<em><code>None</code></em>, <strong><code>rpn_pre_nms_top_n_train</code></strong>=<em><code>2000</code></em>, <strong><code>rpn_pre_nms_top_n_test</code></strong>=<em><code>1000</code></em>, <strong><code>rpn_post_nms_top_n_train</code></strong>=<em><code>2000</code></em>, <strong><code>rpn_post_nms_top_n_test</code></strong>=<em><code>1000</code></em>, <strong><code>rpn_nms_thresh</code></strong>=<em><code>0.7</code></em>, <strong><code>rpn_fg_iou_thresh</code></strong>=<em><code>0.7</code></em>, <strong><code>rpn_bg_iou_thresh</code></strong>=<em><code>0.3</code></em>, <strong><code>rpn_batch_size_per_image</code></strong>=<em><code>256</code></em>, <strong><code>rpn_positive_fraction</code></strong>=<em><code>0.5</code></em>, <strong><code>box_roi_pool</code></strong>=<em><code>None</code></em>, <strong><code>box_head</code></strong>=<em><code>None</code></em>, <strong><code>box_predictor</code></strong>=<em><code>None</code></em>, <strong><code>box_score_thresh</code></strong>=<em><code>0.05</code></em>, <strong><code>box_nms_thresh</code></strong>=<em><code>0.5</code></em>, <strong><code>box_detections_per_img</code></strong>=<em><code>100</code></em>, <strong><code>box_fg_iou_thresh</code></strong>=<em><code>0.5</code></em>, <strong><code>box_bg_iou_thresh</code></strong>=<em><code>0.5</code></em>, <strong><code>box_batch_size_per_image</code></strong>=<em><code>512</code></em>, <strong><code>box_positive_fraction</code></strong>=<em><code>0.25</code></em>, <strong><code>bbox_reg_weights</code></strong>=<em><code>None</code></em>, <strong><code>mask_roi_pool</code></strong>=<em><code>None</code></em>, <strong><code>mask_head</code></strong>=<em><code>None</code></em>, <strong><code>mask_predictor</code></strong>=<em><code>None</code></em>) :: <a href="/fastai_object_detection/learners.html#InstSegLearner"><code>InstSegLearner</code></a></p>
 </blockquote>
 <p>fastai-style learner to train maskrcnn models</p>
 
@@ -393,7 +410,7 @@ nb_path: "notebooks/05_learners.ipynb"
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h2 id="efficientdet_learner" class="doc_header"><code>class</code> <code>efficientdet_learner</code><a href="https://github.com/rbrtwlz/fastai_object_detection/tree/master/fastai_object_detection/learners.py#L225" class="source_link" style="float:right">[source]</a></h2><blockquote><p><code>efficientdet_learner</code>(<strong><code>dls</code></strong>, <strong><code>model</code></strong>, <strong><code>pretrained</code></strong>=<em><code>True</code></em>, <strong><code>pretrained_backbone</code></strong>=<em><code>True</code></em>, <strong><code>num_classes</code></strong>=<em><code>None</code></em>, <strong><code>loss_func</code></strong>=<em><code>noop</code></em>, <strong><code>opt_func</code></strong>=<em><code>Adam</code></em>, <strong><code>lr</code></strong>=<em><code>0.001</code></em>, <strong><code>splitter</code></strong>=<em><code>None</code></em>, <strong><code>cbs</code></strong>=<em><code>None</code></em>, <strong><code>metrics</code></strong>=<em><code>None</code></em>, <strong><code>path</code></strong>=<em><code>None</code></em>, <strong><code>model_dir</code></strong>=<em><code>'models'</code></em>, <strong><code>wd</code></strong>=<em><code>None</code></em>, <strong><code>wd_bn_bias</code></strong>=<em><code>False</code></em>, <strong><code>train_bn</code></strong>=<em><code>True</code></em>, <strong><code>moms</code></strong>=<em><code>(0.95, 0.85, 0.95)</code></em>, <strong><code>compound_coef</code></strong>=<em><code>0</code></em>, <strong><code>nms_score_thresh</code></strong>=<em><code>0.05</code></em>, <strong><code>nms_iou_thresh</code></strong>=<em><code>0.5</code></em>, <strong><code>focal_loss_alpha</code></strong>=<em><code>0.25</code></em>, <strong><code>focal_loss_gamma</code></strong>=<em><code>2.0</code></em>, <strong><code>ratios</code></strong>=<em><code>'[(1.0,1.0),(1.4,0.7),(0.7,1.4)]'</code></em>, <strong><code>scales</code></strong>=<em><code>'[2**0, 2**(1.0/3.0), 2**(2.0/3.0)]'</code></em>) :: <a href="/fastai_object_detection/learners.html#ObjDetLearner"><code>ObjDetLearner</code></a></p>
+<h2 id="efficientdet_learner" class="doc_header"><code>class</code> <code>efficientdet_learner</code><a href="https://github.com/rbrtwlz/fastai_object_detection/tree/master/fastai_object_detection/learners.py#L226" class="source_link" style="float:right">[source]</a></h2><blockquote><p><code>efficientdet_learner</code>(<strong><code>dls</code></strong>, <strong><code>model</code></strong>, <strong><code>pretrained</code></strong>=<em><code>True</code></em>, <strong><code>pretrained_backbone</code></strong>=<em><code>True</code></em>, <strong><code>num_classes</code></strong>=<em><code>None</code></em>, <strong><code>loss_func</code></strong>=<em><code>noop</code></em>, <strong><code>opt_func</code></strong>=<em><code>Adam</code></em>, <strong><code>lr</code></strong>=<em><code>0.001</code></em>, <strong><code>splitter</code></strong>=<em><code>None</code></em>, <strong><code>cbs</code></strong>=<em><code>None</code></em>, <strong><code>metrics</code></strong>=<em><code>None</code></em>, <strong><code>path</code></strong>=<em><code>None</code></em>, <strong><code>model_dir</code></strong>=<em><code>'models'</code></em>, <strong><code>wd</code></strong>=<em><code>None</code></em>, <strong><code>wd_bn_bias</code></strong>=<em><code>False</code></em>, <strong><code>train_bn</code></strong>=<em><code>True</code></em>, <strong><code>moms</code></strong>=<em><code>(0.95, 0.85, 0.95)</code></em>, <strong><code>compound_coef</code></strong>=<em><code>0</code></em>, <strong><code>nms_score_thresh</code></strong>=<em><code>0.05</code></em>, <strong><code>nms_iou_thresh</code></strong>=<em><code>0.5</code></em>, <strong><code>focal_loss_alpha</code></strong>=<em><code>0.25</code></em>, <strong><code>focal_loss_gamma</code></strong>=<em><code>2.0</code></em>, <strong><code>ratios</code></strong>=<em><code>'[(1.0,1.0),(1.4,0.7),(0.7,1.4)]'</code></em>, <strong><code>scales</code></strong>=<em><code>'[2**0, 2**(1.0/3.0), 2**(2.0/3.0)]'</code></em>) :: <a href="/fastai_object_detection/learners.html#ObjDetLearner"><code>ObjDetLearner</code></a></p>
 </blockquote>
 <p>fastai-style learner to train efficientdet models</p>
 
@@ -410,6 +427,193 @@ nb_path: "notebooks/05_learners.ipynb"
     {% raw %}
     
 <div class="cell border-box-sizing code_cell rendered">
+
+</div>
+    {% endraw %}
+
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">fastai_object_detection.dataloaders</span> <span class="kn">import</span> <span class="n">ObjectDetectionDataLoaders</span>
+<span class="kn">from</span> <span class="nn">fastai_object_detection.datasets</span> <span class="kn">import</span> <span class="n">CocoData</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    {% endraw %}
+
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">path</span><span class="p">,</span><span class="n">df</span> <span class="o">=</span> <span class="n">CocoData</span><span class="o">.</span><span class="n">get_path_df</span><span class="p">(</span><span class="s2">&quot;ds-cats-dogs&quot;</span><span class="p">)</span>
+<span class="n">df</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+
+<div class="output_html rendered_html output_subarea output_execute_result">
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>image_id</th>
+      <th>image_path</th>
+      <th>mask_path</th>
+      <th>object_id</th>
+      <th>x_min</th>
+      <th>y_min</th>
+      <th>x_max</th>
+      <th>y_max</th>
+      <th>class_name</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>237643</td>
+      <td>/home/user/.fastai/data/ds-cats-dogs/images/000000237643.jpg</td>
+      <td>/home/user/.fastai/data/ds-cats-dogs/masks/000000237643_0.png</td>
+      <td>0</td>
+      <td>385.42</td>
+      <td>53.01</td>
+      <td>619.38</td>
+      <td>178.05</td>
+      <td>dog</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>157981</td>
+      <td>/home/user/.fastai/data/ds-cats-dogs/images/000000157981.jpg</td>
+      <td>/home/user/.fastai/data/ds-cats-dogs/masks/000000157981_0.png</td>
+      <td>0</td>
+      <td>50.58</td>
+      <td>39.23</td>
+      <td>272.52</td>
+      <td>468.65</td>
+      <td>cat</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+    {% endraw %}
+
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">dls</span> <span class="o">=</span> <span class="n">ObjectDetectionDataLoaders</span><span class="o">.</span><span class="n">from_df</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">valid_pct</span><span class="o">=</span><span class="mf">0.1</span><span class="p">,</span> <span class="n">bs</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> 
+                                        <span class="n">item_tfms</span><span class="o">=</span><span class="p">[</span><span class="n">Resize</span><span class="p">(</span><span class="mi">512</span><span class="p">,</span> <span class="n">method</span><span class="o">=</span><span class="s1">&#39;pad&#39;</span><span class="p">,</span> <span class="n">pad_mode</span><span class="o">=</span><span class="s1">&#39;zeros&#39;</span><span class="p">)],</span>
+                                        <span class="n">batch_tfms</span><span class="o">=</span><span class="p">[</span><span class="n">Normalize</span><span class="o">.</span><span class="n">from_stats</span><span class="p">(</span><span class="o">*</span><span class="n">imagenet_stats</span><span class="p">)])</span>
+
+<span class="n">learn</span> <span class="o">=</span> <span class="n">efficientdet_learner</span><span class="p">(</span><span class="n">dls</span><span class="p">,</span> <span class="n">efficientdet_d0</span><span class="p">,</span> <span class="n">metrics</span><span class="o">=</span><span class="p">[</span><span class="n">mAP_at_IoU40</span><span class="p">])</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    {% endraw %}
+
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">learn</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+
+<div class="output_html rendered_html output_subarea ">
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: left;">
+      <th>epoch</th>
+      <th>train_loss</th>
+      <th>valid_loss</th>
+      <th>mAP@IoU>0.4</th>
+      <th>time</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>0</td>
+      <td>337.820099</td>
+      <td>41.310265</td>
+      <td>0.157791</td>
+      <td>05:05</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+</div>
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stderr output_text">
+<pre>[W NNPACK.cpp:80] Could not initialize NNPACK! Reason: Unsupported hardware.
+</pre>
+</div>
+</div>
+
+</div>
+</div>
 
 </div>
     {% endraw %}
