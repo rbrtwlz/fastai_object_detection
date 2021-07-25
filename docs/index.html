@@ -31,11 +31,63 @@ nb_path: "notebooks/index.ipynb"
 
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>This package makes some object detection and instance segmentation models available for fastai users by using 
+<p>This package makes object detection and instance segmentation models available for fastai users by using 
 a callback which converts the batches to the required input.</p>
 <p>It comes with a fastai <code>DataLoader</code>s class for object detection, prepared and easy to use models and 
 some metrics to measure generated bounding boxes (mAP). So you can train a model for object detection 
 in the simple fastai way with one of the included learner classes.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>All you need is a pandas <code>DataFrame</code> containing the data for each object in the images. In default setting follwing columns are required:</p>
+<p>For the image, which contains the object(s):</p>
+<ul>
+<li><code>image_id</code></li>
+<li><code>image_path</code></li>
+</ul>
+<p>The object's bounding box:</p>
+<ul>
+<li><code>x_min</code></li>
+<li><code>y_min</code></li>
+<li><code>x_max</code></li>
+<li><code>y_max</code></li>
+</ul>
+<p>The object's class/label:</p>
+<ul>
+<li><code>class_name</code></li>
+</ul>
+<p>If you want to use a model for instance segementation, following columns are additionally required:</p>
+<ul>
+<li><code>mask_path</code> (path to the binary mask, which represents the object in the image)</li>
+</ul>
+<p>There are helper functions available, for example for adding the <code>image_path</code> by <code>image_id</code> or to change the bbox format from <code>xywh</code> to <code>x1y1x2y2</code>.</p>
+<p>Futhermore there is a <a href="/fastai_object_detection/datasets.html#CocoData"><code>CocoData</code></a> class provided to help you to download images from <a href="https://cocodataset.org/#home">Microsoft COCO dataset</a>, create the corresponding masks and generate a DataFrame.</p>
+<p>Microsoft COCO dataset contains <strong>328,000 annotated images</strong> of <strong>91 object categories</strong>, so you can pick the categories you want and download just associated images.</p>
+<p>Simply use the following line for example to create a dataset for cat and dog detection:</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">fastai.vision.all</span> <span class="kn">import</span> <span class="o">*</span>
+<span class="kn">from</span> <span class="nn">fastai_object_detection.all</span> <span class="kn">import</span> <span class="o">*</span>
+
+<span class="n">path</span><span class="p">,</span> <span class="n">df</span> <span class="o">=</span> <span class="n">CocoData</span><span class="o">.</span><span class="n">create</span><span class="p">(</span><span class="n">ds_name</span><span class="o">=</span><span class="s2">&quot;coco-cats-and-dogs&quot;</span><span class="p">,</span> <span class="n">cat_list</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;cat&quot;</span><span class="p">,</span> <span class="s2">&quot;dog&quot;</span><span class="p">],</span> <span class="n">max_images</span><span class="o">=</span><span class="mi">2000</span><span class="p">)</span>
+
+<span class="n">dls</span> <span class="o">=</span> <span class="n">ObjectDetectionDataLoaders</span><span class="o">.</span><span class="n">from_df</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">bs</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> 
+                                         <span class="n">item_tfms</span><span class="o">=</span><span class="p">[</span><span class="n">Resize</span><span class="p">(</span><span class="mi">800</span><span class="p">,</span> <span class="n">method</span><span class="o">=</span><span class="s2">&quot;pad&quot;</span><span class="p">,</span> <span class="n">pad_mode</span><span class="o">=</span><span class="s2">&quot;zeros&quot;</span><span class="p">)],</span> 
+                                         <span class="n">batch_tfms</span><span class="o">=</span><span class="p">[</span><span class="n">Normalize</span><span class="o">.</span><span class="n">from_stats</span><span class="p">(</span><span class="o">*</span><span class="n">imagenet_stats</span><span class="p">)])</span>
+<span class="n">dls</span><span class="o">.</span><span class="n">show_batch</span><span class="p">()</span>
+
+<span class="n">learn</span> <span class="o">=</span> <span class="n">fasterrcnn_learner</span><span class="p">(</span><span class="n">dls</span><span class="p">,</span> <span class="n">fasterrcnn_resnet50</span><span class="p">,</span> <span class="n">metrics</span><span class="o">=</span><span class="p">[</span><span class="n">mAP_at_IoU40</span><span class="p">,</span> <span class="n">mAP_at_IoU60</span><span class="p">])</span>
+<span class="n">learn</span><span class="o">.</span><span class="n">lr_find</span><span class="p">()</span>
+
+<span class="n">learn</span><span class="o">.</span><span class="n">fit_one_cycle</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mf">1e-04</span><span class="p">)</span>
+</pre></div>
 
 </div>
 </div>
