@@ -57,16 +57,7 @@ index = {"show_binmask": "00_core.ipynb",
          "mAP_at_IoU70": "06_metrics.ipynb",
          "mAP_at_IoU80": "06_metrics.ipynb",
          "mAP_at_IoU90": "06_metrics.ipynb",
-         "mAP_at_IoU50_95": "06_metrics.ipynb",
-         "mAP_Metric_np": "07_metrics_np.ipynb",
-         "create_mAP_metric_np": "07_metrics_np.ipynb",
-         "mAP_at_IoU40_np": "07_metrics_np.ipynb",
-         "mAP_at_IoU50_np": "07_metrics_np.ipynb",
-         "mAP_at_IoU60_np": "07_metrics_np.ipynb",
-         "mAP_at_IoU70_np": "07_metrics_np.ipynb",
-         "mAP_at_IoU80_np": "07_metrics_np.ipynb",
-         "mAP_at_IoU90_np": "07_metrics_np.ipynb",
-         "mAP_at_IoU50_95_np": "07_metrics_np.ipynb"}
+         "mAP_at_IoU50_95": "06_metrics.ipynb"}
 
 modules = ["core.py",
            "datasets.py",
@@ -76,8 +67,7 @@ modules = ["core.py",
            "models/maskrcnn.py",
            "models/efficientdet.py",
            "learners.py",
-           "metrics.py",
-           "metrics_np.py"]
+           "metrics.py"]
 
 doc_url = "https://rbrtwlz.github.io/fastai_object_detection/"
 

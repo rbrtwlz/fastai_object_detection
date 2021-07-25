@@ -40,9 +40,6 @@ entries:
     - output: web,pdf
       title: Metrics
       url: metrics.html
-    - output: web,pdf
-      title: Metrics NP
-      url: metrics_np.html
     output: web
     title: fastai_object_detection
   output: web

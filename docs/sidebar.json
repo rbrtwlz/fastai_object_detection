@@ -13,7 +13,6 @@
         }
     },
     "Learners": "learners.html",
-    "Metrics": "metrics.html",
-    "Metrics NP": "metrics_np.html"
+    "Metrics": "metrics.html"
   }
 }
