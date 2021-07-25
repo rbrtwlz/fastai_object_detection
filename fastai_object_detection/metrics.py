@@ -87,7 +87,6 @@ def create_mAP_metric(iou_tresh, recall_thresholds, mpolicy, metric_name, remove
     mpolicy: str, 'soft' or 'greedy'
     metric_name: str, name to display in fastai´s recorder
     remove_background_class: True or False, remove first index before evaluation, as it represents background class in our dataloader
-    ----
     Metric Examples:
     COCO mAP: set recall_thresholds=np.arange(0., 1.01, 0.01), mpolicy="soft"
     VOC PASCAL mAP: set recall_thresholds=np.arange(0., 1.1, 0.1), mpolicy="greedy"
