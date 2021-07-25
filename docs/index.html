@@ -122,7 +122,7 @@ in the simple fastai way with one of the included <code>Learner</code> classes.<
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>Now you are ready to create your <a href="/fastai_object_detection/learners.html#fasterrcnn_learner"><code>fasterrcnn_learner</code></a> to train a <a href="https://arxiv.org/abs/1506.01497">FasterRCNN</a> model (with resnet 50 backbone). To validate your models predictions you can use metrics like <a href="/fastai_object_detection/metrics.html#mAP_at_IoU40"><code>mAP_at_IoU40</code></a>.</p>
+<p>Now you are ready to create your <a href="/fastai_object_detection/learners.html#fasterrcnn_learner"><code>fasterrcnn_learner</code></a> to train a <a href="https://arxiv.org/abs/1506.01497">FasterRCNN</a> model (with resnet 50 backbone). To validate your models predictions you can use metrics like <a href="/fastai_object_detection/metrics.html#mAP_at_IoU60"><code>mAP_at_IoU60</code></a>.</p>
 
 </div>
 </div>
@@ -325,9 +325,9 @@ Creating Dataframe...
 
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>Then you can choose with architectur you want to use.</p>
+<p>Then you can choose which architectur you want to use.</p>
 <p>Create a learner and pass a model like <a href="/fastai_object_detection/models.fasterrcnn.html#fasterrcnn_resnet50"><code>fasterrcnn_resnet50</code></a> together with <code>dls</code>.</p>
-<p>In my experiments it was easier to train using <code>SGD</code> as optimizer rather then <code>Adam</code>. Finally you need metrics to measure the predictions of your model. For bounding boxes the metric mean average precision at different IoUs (Intersection over Union) is common.</p>
+<p>In my experiments it was easier to train using <code>SGD</code> as optimizer rather then <code>Adam</code>. Finally you need metrics to measure the predictions of your model. For bounding boxes the metric "mean average precision" at different IoUs (Intersection over Union) is common.</p>
 
 </div>
 </div>

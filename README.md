@@ -65,7 +65,7 @@ dls = ObjectDetectionDataLoaders.from_df(df, bs=2,
 dls.show_batch()
 ```
 
-Now you are ready to create your `fasterrcnn_learner` to train a [FasterRCNN](https://arxiv.org/abs/1506.01497) model (with resnet 50 backbone). To validate your models predictions you can use metrics like `mAP_at_IoU40`.
+Now you are ready to create your `fasterrcnn_learner` to train a [FasterRCNN](https://arxiv.org/abs/1506.01497) model (with resnet 50 backbone). To validate your models predictions you can use metrics like `mAP_at_IoU60`.
 
 ```python
 learn = fasterrcnn_learner(dls, fasterrcnn_resnet50, 
@@ -149,11 +149,11 @@ dls.show_batch(figsize=(10,10))
 ![png](docs/images/output_17_0.png)
 
 
-Then you can choose with architectur you want to use. 
+Then you can choose which architectur you want to use. 
 
 Create a learner and pass a model like `fasterrcnn_resnet50` together with `dls`.
 
-In my experiments it was easier to train using `SGD` as optimizer rather then `Adam`. Finally you need metrics to measure the predictions of your model. For bounding boxes the metric mean average precision at different IoUs (Intersection over Union) is common.
+In my experiments it was easier to train using `SGD` as optimizer rather then `Adam`. Finally you need metrics to measure the predictions of your model. For bounding boxes the metric "mean average precision" at different IoUs (Intersection over Union) is common.
 
 ```
 learn = fasterrcnn_learner(dls, fasterrcnn_resnet50, 

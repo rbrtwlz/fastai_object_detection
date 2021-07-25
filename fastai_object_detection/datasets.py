@@ -11,6 +11,7 @@ from zipfile import ZipFile
 from fastai.data.external import URLs
 from fastai.imports import Path
 from fastai.vision.all import PILImage, PILMask, TensorImage, TensorMask, LabeledBBox, TensorBBox, image2tensor
+from .core import TensorBinMasks, show_binmask
 from fastprogress.fastprogress import master_bar, progress_bar
 from PIL import Image
 import pandas as pd
@@ -116,12 +117,12 @@ class CocoData():
             bboxes = [box for box in df.loc[filt,["x_min","y_min","x_max","y_max"]].values]
             labels = [label[0] for label in df.loc[filt,["class_name"]].values]
             if with_mask:
-                mask_path = df.loc[filt,"mask_path"].values[0]
-                mask = PILMask.create(mask_path)
+                mask_paths = df.loc[filt,"mask_path"].values
+                masks = np.stack([PILMask.create(m) for m in mask_paths])
             fig,ax = plt.subplots(figsize=(8,8))
             TensorImage(image2tensor(img)).show(ax=ax)
             if with_mask:
-                TensorMask(mask).show(ax, cmap=cmap1, vmin=0, vmax=6)
+                TensorBinMasks(masks).show(ax)
             LabeledBBox(TensorBBox(bboxes), labels).show(ax)
 
 
