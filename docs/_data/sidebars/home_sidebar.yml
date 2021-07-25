@@ -29,10 +29,10 @@ entries:
           url: models.fasterrcnn.html
         - output: web,pdf
           title: MaskRCNN
-          url: model.maskrcnn.html
+          url: models.maskrcnn.html
         - output: web,pdf
           title: EfficientDet
-          url: model.efficientdet.html
+          url: models.efficientdet.html
         title: Models
     - output: web,pdf
       title: Learners

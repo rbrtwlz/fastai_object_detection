@@ -8,8 +8,8 @@
     "": {
         "Models": {
                   "FasterRCNN": "models.fasterrcnn.html",
-                  "MaskRCNN": "model.maskrcnn.html",
-                  "EfficientDet": "model.efficientdet.html"
+                  "MaskRCNN": "models.maskrcnn.html",
+                  "EfficientDet": "models.efficientdet.html"
         }
     },
     "Learners": "learners.html",

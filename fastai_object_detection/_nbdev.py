@@ -3,10 +3,10 @@
 __all__ = ["index", "modules", "custom_doc_links", "git_url"]
 
 index = {"show_binmask": "00_core.ipynb",
+         "BinaryMasksBlock": "00_core.ipynb",
          "TensorBinMasks": "00_core.ipynb",
          "TensorBinMasks2TensorMask": "00_core.ipynb",
          "CocoData": "01_datasets.ipynb",
-         "BinaryMasksBlock": "02_dataloaders.ipynb",
          "ObjectDetectionDataLoaders": "02_dataloaders.ipynb",
          "ObjDetAdapter": "03_callbacks.ipynb",
          "get_fasterrcnn_model": "04a_models.fasterrcnn.ipynb",
