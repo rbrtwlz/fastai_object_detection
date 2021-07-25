@@ -5,6 +5,12 @@
     "Datasets": "datasets.html",
     "Dataloaders": "dataloaders.html",
     "Callbacks": "callbacks.html",
+    "": {
+        "Models": {
+                  "FasterRCNN": "models.fasterrcnn.html",
+                  "MaskRCNN": "model.maskrcnn.html"
+        }
+    },
     "Models": "models.html",
     "FasterRCNN": "models.fasterrcnn.html",
     "MaskRCNN": "models.maskrcnn.html",
