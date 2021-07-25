@@ -83,7 +83,7 @@ in the simple fastai way with one of the included <code>Learner</code> classes.<
 <li><code>mask_path</code> (path to the binary mask, which represents the object in the image)</li>
 </ul>
 <p>There are helper functions available, for example for adding the <code>image_path</code> by <code>image_id</code> or to change the bbox format from <code>xywh</code> to <code>x1y1x2y2</code>.</p>
-<p>Futhermore there is a <a href="/fastai_object_detection/datasets.html#CocoData"><code>CocoData</code></a> class provided to help you to download images from <a href="https://cocodataset.org/#home">Microsoft COCO dataset</a>, create the corresponding masks and generate a DataFrame.</p>
+<p>Futhermore there is a <a href="/fastai_object_detection/datasets.html#CocoData"><code>CocoData</code></a> class provided to help you to download images from <a href="https://cocodataset.org/#home">Microsoft COCO dataset</a>, create the corresponding masks and generate a <code>DataFrame</code>.</p>
 <p>Microsoft COCO dataset contains <strong>328,000 annotated images</strong> of <strong>91 object categories</strong>, so you can pick the categories you want and download just associated images.</p>
 <p>Simply use the following line for example to create a dataset for cat and dog detection:</p>
 
@@ -104,7 +104,7 @@ in the simple fastai way with one of the included <code>Learner</code> classes.<
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>Then you can build a <code>DataLoader</code>, using its <code>from_df</code> factory method.</p>
+<p>Then you can build <code>DataLoader</code>s, using it's <code>from_df</code> factory method.</p>
 
 </div>
 </div>
@@ -122,7 +122,7 @@ in the simple fastai way with one of the included <code>Learner</code> classes.<
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>Now you are ready to create your <a href="/fastai_object_detection/learners.html#fasterrcnn_learner"><code>fasterrcnn_learner</code></a> to train a FasterRCNN model (with resnet 50 backbone). To validate your models predictions you can use metrics like <a href="/fastai_object_detection/metrics.html#mAP_at_IoU40"><code>mAP_at_IoU40</code></a>.</p>
+<p>Now you are ready to create your <a href="/fastai_object_detection/learners.html#fasterrcnn_learner"><code>fasterrcnn_learner</code></a> to train a <a href="https://arxiv.org/abs/1506.01497">FasterRCNN</a> model (with resnet 50 backbone). To validate your models predictions you can use metrics like <a href="/fastai_object_detection/metrics.html#mAP_at_IoU40"><code>mAP_at_IoU40</code></a>.</p>
 
 </div>
 </div>
@@ -145,6 +145,13 @@ in the simple fastai way with one of the included <code>Learner</code> classes.<
 </div>
 </div>
 </div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>First import the libraries.</p>
+
+</div>
+</div>
+</div>
     {% raw %}
     
 <div class="cell border-box-sizing code_cell rendered">
@@ -163,6 +170,13 @@ in the simple fastai way with one of the included <code>Learner</code> classes.<
 </div>
     {% endraw %}
 
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Then you can donwload images of the categories you want to detect. If you want to train a instance segmentation model use <code>with_mask=True</code>.</p>
+
+</div>
+</div>
+</div>
     {% raw %}
     
 <div class="cell border-box-sizing code_cell rendered">
@@ -248,6 +262,13 @@ Creating Dataframe...
 </div>
     {% endraw %}
 
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>After the images were downloaded, you can create <code>DataLoaders</code> with the <code>from_df</code> factory method and show some batches. If the column <code>mask_path</code> is present in your <code>DataFrame</code>, it creates a <code>DataLoader</code> for instance segmentation (images, bounding boxes, labels and masks) otherwise for object detection (images, bounding boxes and labels)</p>
+
+</div>
+</div>
+</div>
     {% raw %}
     
 <div class="cell border-box-sizing code_cell rendered">
@@ -302,6 +323,15 @@ Creating Dataframe...
 </div>
     {% endraw %}
 
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Then you can choose with architectur you want to use.</p>
+<p>Create a learner and pass a model like <a href="/fastai_object_detection/models.fasterrcnn.html#fasterrcnn_resnet50"><code>fasterrcnn_resnet50</code></a> together with <code>dls</code>.</p>
+<p>In my experiments it was easier to train using <code>SGD</code> as optimizer rather then <code>Adam</code>. Finally you need metrics to measure the predictions of your model. For bounding boxes the metric mean average precision at different IoUs (Intersection over Union) is common.</p>
+
+</div>
+</div>
+</div>
     {% raw %}
     
 <div class="cell border-box-sizing code_cell rendered">
@@ -360,6 +390,13 @@ Creating Dataframe...
 </div>
     {% endraw %}
 
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>After freezing the <code>Learner</code> you can search for a learning rate using fastai's <code>LRFinder</code>.</p>
+
+</div>
+</div>
+</div>
     {% raw %}
     
 <div class="cell border-box-sizing code_cell rendered">
@@ -483,6 +520,13 @@ Creating Dataframe...
 </div>
     {% endraw %}
 
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>After a couple of epochs you can unfreeze the <code>Learner</code> and train the whole model for some extra epochs.</p>
+
+</div>
+</div>
+</div>
     {% raw %}
     
 <div class="cell border-box-sizing code_cell rendered">

@@ -40,7 +40,7 @@ If you want to use a model for instance segementation, following columns are add
 
 There are helper functions available, for example for adding the `image_path` by `image_id` or to change the bbox format from `xywh` to `x1y1x2y2`.
 
-Futhermore there is a `CocoData` class provided to help you to download images from [Microsoft COCO dataset](https://cocodataset.org/#home), create the corresponding masks and generate a DataFrame.
+Futhermore there is a `CocoData` class provided to help you to download images from [Microsoft COCO dataset](https://cocodataset.org/#home), create the corresponding masks and generate a `DataFrame`.
 
 Microsoft COCO dataset contains **328,000 annotated images** of **91 object categories**, so you can pick the categories you want and download just associated images.
 
@@ -56,7 +56,7 @@ path, df = CocoData.create(ds_name="coco-cats-and-dogs", cat_list=["cat", "dog"]
                            max_images=2000, with_mask=False)
 ```
 
-Then you can build a `DataLoader`, using its `from_df` factory method.
+Then you can build `DataLoader`s, using it's `from_df` factory method.
 
 ```python
 dls = ObjectDetectionDataLoaders.from_df(df, bs=2, 
@@ -65,7 +65,7 @@ dls = ObjectDetectionDataLoaders.from_df(df, bs=2,
 dls.show_batch()
 ```
 
-Now you are ready to create your `fasterrcnn_learner` to train a FasterRCNN model (with resnet 50 backbone). To validate your models predictions you can use metrics like `mAP_at_IoU40`.
+Now you are ready to create your `fasterrcnn_learner` to train a [FasterRCNN](https://arxiv.org/abs/1506.01497) model (with resnet 50 backbone). To validate your models predictions you can use metrics like `mAP_at_IoU40`.
 
 ```python
 learn = fasterrcnn_learner(dls, fasterrcnn_resnet50, 
@@ -78,10 +78,14 @@ learn.fit_one_cycle(10, 1e-04)
 ## Tutorial
 
 
+First import the libraries.
+
 ```
 from fastai.vision.all import *
 from fastai_object_detection.all import *
 ```
+
+Then you can donwload images of the categories you want to detect. If you want to train a instance segmentation model use `with_mask=True`.
 
 ```
 path, df = CocoData.create(ds_name="ds-cats-dogs", cat_list=["cat", "dog"], max_images=500)
@@ -129,6 +133,8 @@ path, df = CocoData.create(ds_name="ds-cats-dogs", cat_list=["cat", "dog"], max_
 
 
 
+After the images were downloaded, you can create `DataLoaders` with the `from_df` factory method and show some batches. If the column `mask_path` is present in your `DataFrame`, it creates a `DataLoader` for instance segmentation (images, bounding boxes, labels and masks) otherwise for object detection (images, bounding boxes and labels)
+
 ```
 dls = ObjectDetectionDataLoaders.from_df(df, bs=2, 
                                          item_tfms=[Resize(800, method="pad", pad_mode="zeros")], 
@@ -140,8 +146,14 @@ dls.show_batch(figsize=(10,10))
 ```
 
 
-![png](docs/images/output_14_0.png)
+![png](docs/images/output_17_0.png)
 
+
+Then you can choose with architectur you want to use. 
+
+Create a learner and pass a model like `fasterrcnn_resnet50` together with `dls`.
+
+In my experiments it was easier to train using `SGD` as optimizer rather then `Adam`. Finally you need metrics to measure the predictions of your model. For bounding boxes the metric mean average precision at different IoUs (Intersection over Union) is common.
 
 ```
 learn = fasterrcnn_learner(dls, fasterrcnn_resnet50, 
@@ -162,6 +174,8 @@ learn.freeze()
     
 
 
+After freezing the `Learner` you can search for a learning rate using fastai's `LRFinder`.
+
 ```
 learn.lr_find()
 ```
@@ -178,7 +192,7 @@ learn.lr_find()
 
 
 
-![png](docs/images/output_16_2.png)
+![png](docs/images/output_21_2.png)
 
 
 ```
@@ -225,6 +239,8 @@ learn.fit_one_cycle(3, 1.2e-03)
   </tbody>
 </table>
 
+
+After a couple of epochs you can unfreeze the `Learner` and train the whole model for some extra epochs.
 
 ```
 learn.unfreeze()
