@@ -8,13 +8,10 @@
     "": {
         "Models": {
                   "FasterRCNN": "models.fasterrcnn.html",
-                  "MaskRCNN": "model.maskrcnn.html"
+                  "MaskRCNN": "model.maskrcnn.html",
+                  "EfficientDet": "model.efficientdet.html"
         }
     },
-    "Models": "models.html",
-    "FasterRCNN": "models.fasterrcnn.html",
-    "MaskRCNN": "models.maskrcnn.html",
-    "EfficientDet": "models.efficientdet.html",
     "Learners": "learners.html",
     "Metrics": "metrics.html",
     "Metrics NP": "metrics_np.html"
