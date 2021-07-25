@@ -2,12 +2,18 @@
 > Extension for <a href='https://docs.fast.ai'>fastai</a> library to include object recognition.
 
 
+## Install
+
+`pip install --upgrade git+https://github.com/rbrtwlz/fastai_object_detection`
+
+## Usage
+
 This package makes object detection and instance segmentation models available for fastai users by using 
 a callback which converts the batches to the required input. 
 
 It comes with a fastai `DataLoader`s class for object detection, prepared and easy to use models and 
 some metrics to measure generated bounding boxes (mAP). So you can train a model for object detection 
-in the simple fastai way with one of the included learner classes.
+in the simple fastai way with one of the included `Learner` classes.
 
 
 All you need is a pandas `DataFrame` containing the data for each object in the images. In default setting follwing columns are required:
@@ -46,31 +52,38 @@ Simply use the following line for example to create a dataset for cat and dog de
 from fastai.vision.all import *
 from fastai_object_detection.all import *
 
-path, df = CocoData.create(ds_name="coco-cats-and-dogs", cat_list=["cat", "dog"], max_images=2000)
+path, df = CocoData.create(ds_name="coco-cats-and-dogs", cat_list=["cat", "dog"], 
+                           max_images=2000, with_mask=False)
+```
 
+Then you can build a `DataLoader`, using its `from_df` factory method.
+
+```python
 dls = ObjectDetectionDataLoaders.from_df(df, bs=2, 
                                          item_tfms=[Resize(800, method="pad", pad_mode="zeros")], 
                                          batch_tfms=[Normalize.from_stats(*imagenet_stats)])
 dls.show_batch()
-
-learn = fasterrcnn_learner(dls, fasterrcnn_resnet50, metrics=[mAP_at_IoU40, mAP_at_IoU60])
-learn.lr_find()
-
-learn.fit_one_cycle(1, 1e-04)
 ```
 
-## Install
-
-`pip install --upgrade git+https://github.com/rbrtwlz/fastai_object_detection`
-
-## Usage
+Now you are ready to create your `fasterrcnn_learner` to train a FasterRCNN model (with resnet 50 backbone). To validate your models predictions you can use metrics like `mAP_at_IoU40`.
 
 ```python
+learn = fasterrcnn_learner(dls, fasterrcnn_resnet50, 
+                           opt_func=SGD, lr=0.005, wd=0.0005, train_bn=False,
+                           metrics=[mAP_at_IoU40, mAP_at_IoU60])
+learn.lr_find()
+learn.fit_one_cycle(10, 1e-04)
+```
+
+## Tutorial
+
+
+```
 from fastai.vision.all import *
 from fastai_object_detection.all import *
 ```
 
-```python
+```
 path, df = CocoData.create(ds_name="ds-cats-dogs", cat_list=["cat", "dog"], max_images=500)
 ```
 
@@ -116,21 +129,21 @@ path, df = CocoData.create(ds_name="ds-cats-dogs", cat_list=["cat", "dog"], max_
 
 
 
-```python
+```
 dls = ObjectDetectionDataLoaders.from_df(df, bs=2, 
                                          item_tfms=[Resize(800, method="pad", pad_mode="zeros")], 
                                          batch_tfms=[Normalize.from_stats(*imagenet_stats)])
 ```
 
-```python
+```
 dls.show_batch(figsize=(10,10))
 ```
 
 
-![png](docs/images/output_9_0.png)
+![png](docs/images/output_14_0.png)
 
 
-```python
+```
 learn = fasterrcnn_learner(dls, fasterrcnn_resnet50, 
                            opt_func=SGD, lr=0.005, wd=0.0005, train_bn=False,
                            metrics=[mAP_at_IoU40, mAP_at_IoU60])
@@ -149,7 +162,7 @@ learn.freeze()
     
 
 
-```python
+```
 learn.lr_find()
 ```
 
@@ -165,10 +178,10 @@ learn.lr_find()
 
 
 
-![png](docs/images/output_11_2.png)
+![png](docs/images/output_16_2.png)
 
 
-```python
+```
 learn.fit_one_cycle(3, 1.2e-03)
 ```
 
@@ -213,11 +226,11 @@ learn.fit_one_cycle(3, 1.2e-03)
 </table>
 
 
-```python
+```
 learn.unfreeze()
 ```
 
-```python
+```
 learn.fit_one_cycle(3, 1.2e-03)
 ```
 

@@ -31,11 +31,30 @@ nb_path: "notebooks/index.ipynb"
 
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Install">Install<a class="anchor-link" href="#Install"> </a></h2>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p><code>pip install --upgrade git+https://github.com/rbrtwlz/fastai_object_detection</code></p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Usage">Usage<a class="anchor-link" href="#Usage"> </a></h2>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
 <p>This package makes object detection and instance segmentation models available for fastai users by using 
 a callback which converts the batches to the required input.</p>
 <p>It comes with a fastai <code>DataLoader</code>s class for object detection, prepared and easy to use models and 
 some metrics to measure generated bounding boxes (mAP). So you can train a model for object detection 
-in the simple fastai way with one of the included learner classes.</p>
+in the simple fastai way with one of the included <code>Learner</code> classes.</p>
 
 </div>
 </div>
@@ -76,17 +95,8 @@ in the simple fastai way with one of the included learner classes.</p>
 <div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">fastai.vision.all</span> <span class="kn">import</span> <span class="o">*</span>
 <span class="kn">from</span> <span class="nn">fastai_object_detection.all</span> <span class="kn">import</span> <span class="o">*</span>
 
-<span class="n">path</span><span class="p">,</span> <span class="n">df</span> <span class="o">=</span> <span class="n">CocoData</span><span class="o">.</span><span class="n">create</span><span class="p">(</span><span class="n">ds_name</span><span class="o">=</span><span class="s2">&quot;coco-cats-and-dogs&quot;</span><span class="p">,</span> <span class="n">cat_list</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;cat&quot;</span><span class="p">,</span> <span class="s2">&quot;dog&quot;</span><span class="p">],</span> <span class="n">max_images</span><span class="o">=</span><span class="mi">2000</span><span class="p">)</span>
-
-<span class="n">dls</span> <span class="o">=</span> <span class="n">ObjectDetectionDataLoaders</span><span class="o">.</span><span class="n">from_df</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">bs</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> 
-                                         <span class="n">item_tfms</span><span class="o">=</span><span class="p">[</span><span class="n">Resize</span><span class="p">(</span><span class="mi">800</span><span class="p">,</span> <span class="n">method</span><span class="o">=</span><span class="s2">&quot;pad&quot;</span><span class="p">,</span> <span class="n">pad_mode</span><span class="o">=</span><span class="s2">&quot;zeros&quot;</span><span class="p">)],</span> 
-                                         <span class="n">batch_tfms</span><span class="o">=</span><span class="p">[</span><span class="n">Normalize</span><span class="o">.</span><span class="n">from_stats</span><span class="p">(</span><span class="o">*</span><span class="n">imagenet_stats</span><span class="p">)])</span>
-<span class="n">dls</span><span class="o">.</span><span class="n">show_batch</span><span class="p">()</span>
-
-<span class="n">learn</span> <span class="o">=</span> <span class="n">fasterrcnn_learner</span><span class="p">(</span><span class="n">dls</span><span class="p">,</span> <span class="n">fasterrcnn_resnet50</span><span class="p">,</span> <span class="n">metrics</span><span class="o">=</span><span class="p">[</span><span class="n">mAP_at_IoU40</span><span class="p">,</span> <span class="n">mAP_at_IoU60</span><span class="p">])</span>
-<span class="n">learn</span><span class="o">.</span><span class="n">lr_find</span><span class="p">()</span>
-
-<span class="n">learn</span><span class="o">.</span><span class="n">fit_one_cycle</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mf">1e-04</span><span class="p">)</span>
+<span class="n">path</span><span class="p">,</span> <span class="n">df</span> <span class="o">=</span> <span class="n">CocoData</span><span class="o">.</span><span class="n">create</span><span class="p">(</span><span class="n">ds_name</span><span class="o">=</span><span class="s2">&quot;coco-cats-and-dogs&quot;</span><span class="p">,</span> <span class="n">cat_list</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;cat&quot;</span><span class="p">,</span> <span class="s2">&quot;dog&quot;</span><span class="p">],</span> 
+                           <span class="n">max_images</span><span class="o">=</span><span class="mi">2000</span><span class="p">,</span> <span class="n">with_mask</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
 </pre></div>
 
 </div>
@@ -94,20 +104,44 @@ in the simple fastai way with one of the included learner classes.</p>
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="Install">Install<a class="anchor-link" href="#Install"> </a></h2>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<p><code>pip install --upgrade git+https://github.com/rbrtwlz/fastai_object_detection</code></p>
+<p>Then you can build a <code>DataLoader</code>, using its <code>from_df</code> factory method.</p>
 
 </div>
 </div>
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="Usage">Usage<a class="anchor-link" href="#Usage"> </a></h2>
+<div class="highlight"><pre><span></span><span class="n">dls</span> <span class="o">=</span> <span class="n">ObjectDetectionDataLoaders</span><span class="o">.</span><span class="n">from_df</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">bs</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> 
+                                         <span class="n">item_tfms</span><span class="o">=</span><span class="p">[</span><span class="n">Resize</span><span class="p">(</span><span class="mi">800</span><span class="p">,</span> <span class="n">method</span><span class="o">=</span><span class="s2">&quot;pad&quot;</span><span class="p">,</span> <span class="n">pad_mode</span><span class="o">=</span><span class="s2">&quot;zeros&quot;</span><span class="p">)],</span> 
+                                         <span class="n">batch_tfms</span><span class="o">=</span><span class="p">[</span><span class="n">Normalize</span><span class="o">.</span><span class="n">from_stats</span><span class="p">(</span><span class="o">*</span><span class="n">imagenet_stats</span><span class="p">)])</span>
+<span class="n">dls</span><span class="o">.</span><span class="n">show_batch</span><span class="p">()</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Now you are ready to create your <a href="/fastai_object_detection/learners.html#fasterrcnn_learner"><code>fasterrcnn_learner</code></a> to train a FasterRCNN model (with resnet 50 backbone). To validate your models predictions you can use metrics like <a href="/fastai_object_detection/metrics.html#mAP_at_IoU40"><code>mAP_at_IoU40</code></a>.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<div class="highlight"><pre><span></span><span class="n">learn</span> <span class="o">=</span> <span class="n">fasterrcnn_learner</span><span class="p">(</span><span class="n">dls</span><span class="p">,</span> <span class="n">fasterrcnn_resnet50</span><span class="p">,</span> 
+                           <span class="n">opt_func</span><span class="o">=</span><span class="n">SGD</span><span class="p">,</span> <span class="n">lr</span><span class="o">=</span><span class="mf">0.005</span><span class="p">,</span> <span class="n">wd</span><span class="o">=</span><span class="mf">0.0005</span><span class="p">,</span> <span class="n">train_bn</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+                           <span class="n">metrics</span><span class="o">=</span><span class="p">[</span><span class="n">mAP_at_IoU40</span><span class="p">,</span> <span class="n">mAP_at_IoU60</span><span class="p">])</span>
+<span class="n">learn</span><span class="o">.</span><span class="n">lr_find</span><span class="p">()</span>
+<span class="n">learn</span><span class="o">.</span><span class="n">fit_one_cycle</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mf">1e-04</span><span class="p">)</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Tutorial">Tutorial<a class="anchor-link" href="#Tutorial"> </a></h2>
 </div>
 </div>
 </div>
