@@ -2,11 +2,6 @@
 > Extension for <a href='https://docs.fast.ai'>fastai</a> library to include object recognition.
 
 
-```
-#!pip install fastai==2.3
-#!pip install --upgrade git+https://github.com/rbrtwlz/fastai_object_detection --log log.txt
-```
-
 This package makes some object detection and instance segmentation models available for fastai users by using 
 a callback which converts the batches to the required input. 
 
@@ -82,7 +77,7 @@ dls.show_batch(figsize=(10,10))
 ```
 
 
-![png](docs/images/output_8_0.png)
+![png](docs/images/output_7_0.png)
 
 
 ```
@@ -120,7 +115,7 @@ learn.lr_find()
 
 
 
-![png](docs/images/output_10_2.png)
+![png](docs/images/output_9_2.png)
 
 
 ```

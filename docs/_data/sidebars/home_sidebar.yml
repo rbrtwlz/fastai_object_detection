@@ -25,6 +25,9 @@ entries:
       - output: web
         subfolderitems:
         - output: web,pdf
+          title: General
+          url: models.html
+        - output: web,pdf
           title: FasterRCNN
           url: models.fasterrcnn.html
         - output: web,pdf
