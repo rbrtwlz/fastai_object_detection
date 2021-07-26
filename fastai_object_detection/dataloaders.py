@@ -79,6 +79,7 @@ class ObjectDetectionDataLoaders(DataLoaders):
             res = cls.from_dblock(dblock, df, path=".", before_batch=[bb_pad], **kwargs)
 
         else:
+            if batch_tfms is None: batch_tfms = []
             dblock = DataBlock(
                 blocks=(ImageBlock(cls=PILImage), BinaryMasksBlock,
                         BBoxBlock, BBoxLblBlock(vocab=vocab, add_na=add_na)),

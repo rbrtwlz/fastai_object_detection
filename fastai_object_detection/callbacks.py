@@ -60,7 +60,6 @@ class ObjDetAdapter(Callback):
 
     def transform_batch(self,x1,*yb):
         yb = [*yb]
-
         # check if with or without mask
         with_mask = len(yb) == 3
 
@@ -68,14 +67,12 @@ class ObjDetAdapter(Callback):
         dev = x1.device
 
         y={}
-
-        keys = ["masks", "boxes", "labels"] if with_mask else ["boxes", "labels"]
+        keys = "masks boxes labels".split() if with_mask else "boxes labels".split()
         for i,k in enumerate(keys):
             y[k] = [e for e in yb[i]]
 
         y = [dict(zip(y,t)) for t in zip(*y.values())] # dict of lists to list of dicts
 
-        #new_y = []
         for d in y:
             # remove padding
             filt = d["labels"]!=self.pad_idx
@@ -84,7 +81,6 @@ class ObjDetAdapter(Callback):
 
             # remove empty bboxes
             filt = (d["boxes"][:,0]-d["boxes"][:,2])*(d["boxes"][:,1]-d["boxes"][:,3])!=0
-
             #filt = torch.eq(d["boxes"], tensor([[0.,0.,0.,0.]], device=dev)).all(dim=1)
             for k in keys:
                 d[k] = d[k][filt]
@@ -98,5 +94,4 @@ class ObjDetAdapter(Callback):
                 for k in keys:
                     d[k] = d[k][~filt]
 
-            #new_y.append(d)
         return [x1],[y] # xb,yb
