@@ -82,6 +82,248 @@ nb_path: "notebooks/04b_models.maskrcnn.ipynb"
 </div>
     {% endraw %}
 
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Custom-MaskRCNN">Custom MaskRCNN<a class="anchor-link" href="#Custom-MaskRCNN"> </a></h2>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>To create a model, which you can pass to a <a href="/fastai_object_detection/learners.html#InstSegLearner"><code>InstSegLearner</code></a> simply create a <code>partial</code> with the function <a href="/fastai_object_detection/models.maskrcnn.html#get_maskrcnn_model"><code>get_maskrcnn_model</code></a> (resnet backbone).</p>
+
+</div>
+</div>
+</div>
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">functools</span> <span class="kn">import</span> <span class="n">partial</span>
+
+<span class="n">custom_maskrcnn</span> <span class="o">=</span> <span class="n">partial</span><span class="p">(</span><span class="n">get_maskrcnn_model</span><span class="p">,</span> <span class="n">arch_str</span><span class="o">=</span><span class="s2">&quot;resnet18&quot;</span><span class="p">,</span> 
+                          <span class="n">pretrained</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">pretrained_backbone</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> 
+                          <span class="n">min_size</span><span class="o">=</span><span class="mi">600</span><span class="p">,</span> <span class="n">max_size</span><span class="o">=</span><span class="mi">600</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    {% endraw %}
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>When building the <code>Learner</code>, the number of classes are getting passed to this partial function and the model is ready for training.</p>
+
+</div>
+</div>
+</div>
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">custom_maskrcnn</span><span class="p">(</span><span class="n">num_classes</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>No pretrained coco model found for maskrcnn_resnet18
+This does not affect the backbone.
+</pre>
+</div>
+</div>
+
+<div class="output_area">
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>MaskRCNN(
+  (transform): GeneralizedRCNNTransform(
+      Normalize(mean=[0.0, 0.0, 0.0], std=[1.0, 1.0, 1.0])
+      Resize(min_size=(600,), max_size=600, mode=&#39;bilinear&#39;)
+  )
+  (backbone): BackboneWithFPN(
+    (body): IntermediateLayerGetter(
+      (conv1): Conv2d(3, 64, kernel_size=(7, 7), stride=(2, 2), padding=(3, 3), bias=False)
+      (bn1): FrozenBatchNorm2d(64)
+      (relu): ReLU(inplace=True)
+      (maxpool): MaxPool2d(kernel_size=3, stride=2, padding=1, dilation=1, ceil_mode=False)
+      (layer1): Sequential(
+        (0): BasicBlock(
+          (conv1): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+          (bn1): FrozenBatchNorm2d(64)
+          (relu): ReLU(inplace=True)
+          (conv2): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+          (bn2): FrozenBatchNorm2d(64)
+        )
+        (1): BasicBlock(
+          (conv1): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+          (bn1): FrozenBatchNorm2d(64)
+          (relu): ReLU(inplace=True)
+          (conv2): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+          (bn2): FrozenBatchNorm2d(64)
+        )
+      )
+      (layer2): Sequential(
+        (0): BasicBlock(
+          (conv1): Conv2d(64, 128, kernel_size=(3, 3), stride=(2, 2), padding=(1, 1), bias=False)
+          (bn1): FrozenBatchNorm2d(128)
+          (relu): ReLU(inplace=True)
+          (conv2): Conv2d(128, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+          (bn2): FrozenBatchNorm2d(128)
+          (downsample): Sequential(
+            (0): Conv2d(64, 128, kernel_size=(1, 1), stride=(2, 2), bias=False)
+            (1): FrozenBatchNorm2d(128)
+          )
+        )
+        (1): BasicBlock(
+          (conv1): Conv2d(128, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+          (bn1): FrozenBatchNorm2d(128)
+          (relu): ReLU(inplace=True)
+          (conv2): Conv2d(128, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+          (bn2): FrozenBatchNorm2d(128)
+        )
+      )
+      (layer3): Sequential(
+        (0): BasicBlock(
+          (conv1): Conv2d(128, 256, kernel_size=(3, 3), stride=(2, 2), padding=(1, 1), bias=False)
+          (bn1): FrozenBatchNorm2d(256)
+          (relu): ReLU(inplace=True)
+          (conv2): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+          (bn2): FrozenBatchNorm2d(256)
+          (downsample): Sequential(
+            (0): Conv2d(128, 256, kernel_size=(1, 1), stride=(2, 2), bias=False)
+            (1): FrozenBatchNorm2d(256)
+          )
+        )
+        (1): BasicBlock(
+          (conv1): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+          (bn1): FrozenBatchNorm2d(256)
+          (relu): ReLU(inplace=True)
+          (conv2): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+          (bn2): FrozenBatchNorm2d(256)
+        )
+      )
+      (layer4): Sequential(
+        (0): BasicBlock(
+          (conv1): Conv2d(256, 512, kernel_size=(3, 3), stride=(2, 2), padding=(1, 1), bias=False)
+          (bn1): FrozenBatchNorm2d(512)
+          (relu): ReLU(inplace=True)
+          (conv2): Conv2d(512, 512, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+          (bn2): FrozenBatchNorm2d(512)
+          (downsample): Sequential(
+            (0): Conv2d(256, 512, kernel_size=(1, 1), stride=(2, 2), bias=False)
+            (1): FrozenBatchNorm2d(512)
+          )
+        )
+        (1): BasicBlock(
+          (conv1): Conv2d(512, 512, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+          (bn1): FrozenBatchNorm2d(512)
+          (relu): ReLU(inplace=True)
+          (conv2): Conv2d(512, 512, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+          (bn2): FrozenBatchNorm2d(512)
+        )
+      )
+    )
+    (fpn): FeaturePyramidNetwork(
+      (inner_blocks): ModuleList(
+        (0): Conv2d(64, 256, kernel_size=(1, 1), stride=(1, 1))
+        (1): Conv2d(128, 256, kernel_size=(1, 1), stride=(1, 1))
+        (2): Conv2d(256, 256, kernel_size=(1, 1), stride=(1, 1))
+        (3): Conv2d(512, 256, kernel_size=(1, 1), stride=(1, 1))
+      )
+      (layer_blocks): ModuleList(
+        (0): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+        (1): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+        (2): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+        (3): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+      )
+      (extra_blocks): LastLevelMaxPool()
+    )
+  )
+  (rpn): RegionProposalNetwork(
+    (anchor_generator): AnchorGenerator()
+    (head): RPNHead(
+      (conv): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+      (cls_logits): Conv2d(256, 3, kernel_size=(1, 1), stride=(1, 1))
+      (bbox_pred): Conv2d(256, 12, kernel_size=(1, 1), stride=(1, 1))
+    )
+  )
+  (roi_heads): RoIHeads(
+    (box_roi_pool): MultiScaleRoIAlign()
+    (box_head): TwoMLPHead(
+      (fc6): Linear(in_features=12544, out_features=1024, bias=True)
+      (fc7): Linear(in_features=1024, out_features=1024, bias=True)
+    )
+    (box_predictor): FastRCNNPredictor(
+      (cls_score): Linear(in_features=1024, out_features=5, bias=True)
+      (bbox_pred): Linear(in_features=1024, out_features=20, bias=True)
+    )
+    (mask_roi_pool): MultiScaleRoIAlign()
+    (mask_head): MaskRCNNHeads(
+      (mask_fcn1): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+      (relu1): ReLU(inplace=True)
+      (mask_fcn2): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+      (relu2): ReLU(inplace=True)
+      (mask_fcn3): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+      (relu3): ReLU(inplace=True)
+      (mask_fcn4): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+      (relu4): ReLU(inplace=True)
+    )
+    (mask_predictor): MaskRCNNPredictor(
+      (conv5_mask): ConvTranspose2d(256, 256, kernel_size=(2, 2), stride=(2, 2))
+      (relu): ReLU(inplace=True)
+      (mask_fcn_logits): Conv2d(256, 5, kernel_size=(1, 1), stride=(1, 1))
+    )
+  )
+)</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+    {% endraw %}
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Prebuilt-models">Prebuilt models<a class="anchor-link" href="#Prebuilt-models"> </a></h2>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>There are some prebuilt model partials, which you can use instantly:</p>
+<ul>
+<li><a href="/fastai_object_detection/models.maskrcnn.html#maskrcnn_resnet18"><code>maskrcnn_resnet18</code></a></li>
+<li><a href="/fastai_object_detection/models.maskrcnn.html#maskrcnn_resnet34"><code>maskrcnn_resnet34</code></a></li>
+<li><a href="/fastai_object_detection/models.maskrcnn.html#maskrcnn_resnet50"><code>maskrcnn_resnet50</code></a></li>
+<li><a href="/fastai_object_detection/models.maskrcnn.html#maskrcnn_resnet101"><code>maskrcnn_resnet101</code></a></li>
+<li><a href="/fastai_object_detection/models.maskrcnn.html#maskrcnn_resnet152"><code>maskrcnn_resnet152</code></a></li>
+</ul>
+
+</div>
+</div>
+</div>
 </div>
  
 
