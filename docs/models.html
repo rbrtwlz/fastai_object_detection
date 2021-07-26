@@ -39,6 +39,7 @@ nb_path: "notebooks/04_models.ipynb"
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">ModelWrapper</span><span class="p">(</span><span class="n">nn</span><span class="o">.</span><span class="n">Module</span><span class="p">):</span>
+
     <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">model</span> <span class="o">=</span> <span class="n">Model</span><span class="p">()</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">criterion</span> <span class="o">=</span> <span class="n">LossFn</span><span class="p">()</span>
@@ -74,7 +75,7 @@ nb_path: "notebooks/04_models.ipynb"
 <li><code>boxes: [n, 4]</code></li>
 <li><code>masks: [n, h, w]</code></li>
 </ul>
-<p>Then it converts this input to the input required by the model (<code>FnIn</code>).</p>
+<p>Then it converts this input to the annotations required by the model (<code>FnIn</code>).</p>
 <p>If there are targets present <code>forward</code> returns the loss (<code>Dict[str,Tensor]</code>), if not it calls <code>postprocess</code>, which converts the predictions (<code>FnOut</code>) to a list of dicts with the keys <code>boxes</code>, <code>labels</code> and optionally <code>masks</code> with tensors as values, which are getting passed to the metrics.</p>
 
 </div>
