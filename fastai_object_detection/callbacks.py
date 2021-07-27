@@ -8,6 +8,16 @@ from fastai.torch_basics import *
 from fastai.torch_core import *
 
 # Cell
+# fix
+# https://github.com/fastai/fastai/issues/3384
+
+from fastai.vision.core import TensorBBox
+from .core import TensorBinMasks
+
+TensorMultiCategory.register_func(Tensor.__getitem__, TensorMultiCategory, TensorBBox)
+TensorMultiCategory.register_func(Tensor.__getitem__, TensorMultiCategory, TensorBinMasks)
+
+# Cell
 class ObjDetAdapter(Callback):
     """Callback to convert batches from fastai's dataloader to the
     expected input of object detection and instance segmentation models"""
