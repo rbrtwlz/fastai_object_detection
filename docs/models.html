@@ -6,8 +6,8 @@ title: Models
 keywords: fastai
 sidebar: home_sidebar
 
-summary: "How to implement new models"
-description: "How to implement new models"
+summary: "Implementation of models"
+description: "Implementation of models"
 nb_path: "notebooks/04_models.ipynb"
 ---
 <!--
@@ -40,15 +40,12 @@ nb_path: "notebooks/04_models.ipynb"
 <div class="text_cell_render border-box-sizing rendered_html">
 <div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">ModelWrapper</span><span class="p">(</span><span class="n">nn</span><span class="o">.</span><span class="n">Module</span><span class="p">):</span>
 
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">model</span> <span class="o">=</span> <span class="n">Model</span><span class="p">()</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">criterion</span> <span class="o">=</span> <span class="n">LossFn</span><span class="p">()</span>
 
     <span class="k">def</span> <span class="nf">preprocess</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">:</span><span class="n">Tensor</span><span class="p">,</span> <span class="n">target</span><span class="p">:</span><span class="n">List</span><span class="p">[</span><span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span><span class="n">Tensor</span><span class="p">]]</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
-        <span class="k">if</span> <span class="n">target</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span> 
-            <span class="n">annotations</span> <span class="o">=</span> <span class="kc">None</span>
-        <span class="k">else</span><span class="p">:</span>
-            <span class="n">annotations</span> <span class="o">=</span> <span class="n">FnIn</span><span class="p">(</span><span class="n">target</span><span class="p">)</span>
+        <span class="n">annotations</span> <span class="o">=</span> <span class="kc">None</span> <span class="k">if</span> <span class="n">target</span> <span class="ow">is</span> <span class="kc">None</span> <span class="k">else</span> <span class="n">FnIn</span><span class="p">(</span><span class="n">target</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">x</span><span class="p">,</span> <span class="n">annotations</span>
 
     <span class="k">def</span> <span class="nf">forward</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">x</span><span class="p">):</span>
@@ -58,7 +55,7 @@ nb_path: "notebooks/04_models.ipynb"
         <span class="k">if</span> <span class="n">targets</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
             <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">postprocess</span><span class="p">(</span><span class="n">preds</span><span class="p">)</span>
         <span class="k">else</span><span class="p">:</span>
-            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">criterion</span><span class="p">(</span><span class="n">preds</span><span class="p">,</span><span class="n">targets</span><span class="p">)</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">criterion</span><span class="p">(</span><span class="n">preds</span><span class="p">,</span> <span class="n">targets</span><span class="p">)</span>
 
     <span class="k">def</span> <span class="nf">postprocess</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">preds</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span><span class="n">Tensor</span><span class="p">]]:</span>
         <span class="k">return</span> <span class="n">FnOut</span><span class="p">(</span><span class="n">preds</span><span class="p">)</span>
@@ -76,7 +73,7 @@ nb_path: "notebooks/04_models.ipynb"
 <li><code>masks: [n, h, w]</code></li>
 </ul>
 <p>Then it converts this input to the annotations required by the model (<code>FnIn</code>).</p>
-<p>If there are targets present <code>forward</code> returns the loss (<code>Dict[str,Tensor]</code>), if not it calls <code>postprocess</code>, which converts the predictions (<code>FnOut</code>) to a list of dicts with the keys <code>boxes</code>, <code>labels</code> and optionally <code>masks</code> with tensors as values, which are getting passed to the metrics.</p>
+<p>If there are targets present <code>forward</code> returns the loss (<code>Dict[str,Tensor]</code>), if not it calls <code>postprocess</code>, which converts the predictions (<code>FnOut</code>) to a list of dicts with the keys <code>boxes</code>, <code>labels</code>, <code>scores</code> and optionally <code>masks</code> with tensors as values, which are getting passed to the metrics.</p>
 
 </div>
 </div>

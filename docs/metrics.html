@@ -6,8 +6,8 @@ title: Metrics
 keywords: fastai
 sidebar: home_sidebar
 
-summary: "Definition of the metrics that can be used in training models"
-description: "Definition of the metrics that can be used in training models"
+summary: "Definition of the metrics that can be used to evaluate models"
+description: "Definition of the metrics that can be used to evaluate models"
 nb_path: "notebooks/06_metrics.ipynb"
 ---
 <!--
@@ -90,6 +90,12 @@ nb_path: "notebooks/06_metrics.ipynb"
 </div>
     {% endraw %}
 
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Function-to-create-mAP-metrics">Function to create mAP metrics<a class="anchor-link" href="#Function-to-create-mAP-metrics"> </a></h2>
+</div>
+</div>
+</div>
     {% raw %}
     
 <div class="cell border-box-sizing code_cell rendered">
@@ -138,6 +144,341 @@ VOC PASCAL mAP in all points: set recall_thresholds=None, mpolicy="greedy"</p>
 </div>
     {% endraw %}
 
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Custom-mAP-metrics">Custom mAP metrics<a class="anchor-link" href="#Custom-mAP-metrics"> </a></h2>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>First we create some predictions and targets. Note that our dataloader contains a background class with index 0 and all metrics remove by default the background class, so the first class has index 1 and the number of classes is 2.</p>
+
+</div>
+</div>
+</div>
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">num_classes</span> <span class="o">=</span> <span class="mi">2</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    {% endraw %}
+
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">boxes</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">tensor</span><span class="p">([</span>
+    <span class="p">[</span><span class="mi">439</span><span class="p">,</span> <span class="mi">157</span><span class="p">,</span> <span class="mi">556</span><span class="p">,</span> <span class="mi">241</span><span class="p">],</span>
+    <span class="p">[</span><span class="mi">437</span><span class="p">,</span> <span class="mi">246</span><span class="p">,</span> <span class="mi">518</span><span class="p">,</span> <span class="mi">351</span><span class="p">],</span>
+    <span class="p">[</span><span class="mi">515</span><span class="p">,</span> <span class="mi">306</span><span class="p">,</span> <span class="mi">595</span><span class="p">,</span> <span class="mi">375</span><span class="p">],</span>
+    <span class="p">[</span><span class="mi">407</span><span class="p">,</span> <span class="mi">386</span><span class="p">,</span> <span class="mi">531</span><span class="p">,</span> <span class="mi">476</span><span class="p">],</span>
+    <span class="p">[</span><span class="mi">544</span><span class="p">,</span> <span class="mi">419</span><span class="p">,</span> <span class="mi">621</span><span class="p">,</span> <span class="mi">476</span><span class="p">],</span>
+    <span class="p">[</span><span class="mi">609</span><span class="p">,</span> <span class="mi">297</span><span class="p">,</span> <span class="mi">636</span><span class="p">,</span> <span class="mi">392</span><span class="p">]])</span>
+<span class="n">labels</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">ones</span><span class="p">(</span><span class="mi">6</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">torch</span><span class="o">.</span><span class="n">long</span><span class="p">)</span>
+
+<span class="n">targs</span> <span class="o">=</span> <span class="p">[</span><span class="nb">dict</span><span class="p">({</span><span class="s2">&quot;boxes&quot;</span><span class="p">:</span><span class="n">boxes</span><span class="p">,</span> <span class="s2">&quot;labels&quot;</span><span class="p">:</span><span class="n">labels</span><span class="p">})]</span>
+<span class="n">targs</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>[{&#39;boxes&#39;: tensor([[439, 157, 556, 241],
+          [437, 246, 518, 351],
+          [515, 306, 595, 375],
+          [407, 386, 531, 476],
+          [544, 419, 621, 476],
+          [609, 297, 636, 392]]),
+  &#39;labels&#39;: tensor([1, 1, 1, 1, 1, 1])}]</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+    {% endraw %}
+
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">boxes</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">tensor</span><span class="p">([</span>
+    <span class="p">[</span><span class="mi">429</span><span class="p">,</span> <span class="mi">219</span><span class="p">,</span> <span class="mi">528</span><span class="p">,</span> <span class="mi">247</span><span class="p">],</span>
+    <span class="p">[</span><span class="mi">433</span><span class="p">,</span> <span class="mi">260</span><span class="p">,</span> <span class="mi">506</span><span class="p">,</span> <span class="mi">336</span><span class="p">],</span>
+    <span class="p">[</span><span class="mi">518</span><span class="p">,</span> <span class="mi">314</span><span class="p">,</span> <span class="mi">603</span><span class="p">,</span> <span class="mi">369</span><span class="p">],</span>
+    <span class="p">[</span><span class="mi">592</span><span class="p">,</span> <span class="mi">310</span><span class="p">,</span> <span class="mi">634</span><span class="p">,</span> <span class="mi">388</span><span class="p">],</span>
+    <span class="p">[</span><span class="mi">403</span><span class="p">,</span> <span class="mi">384</span><span class="p">,</span> <span class="mi">517</span><span class="p">,</span> <span class="mi">461</span><span class="p">],</span>
+    <span class="p">[</span><span class="mi">405</span><span class="p">,</span> <span class="mi">429</span><span class="p">,</span> <span class="mi">519</span><span class="p">,</span> <span class="mi">470</span><span class="p">],</span>
+    <span class="p">[</span><span class="mi">433</span><span class="p">,</span> <span class="mi">272</span><span class="p">,</span> <span class="mi">499</span><span class="p">,</span> <span class="mi">341</span><span class="p">],</span>
+    <span class="p">[</span><span class="mi">413</span><span class="p">,</span> <span class="mi">390</span><span class="p">,</span> <span class="mi">515</span><span class="p">,</span> <span class="mi">459</span><span class="p">]])</span>
+<span class="n">labels</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">ones</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">torch</span><span class="o">.</span><span class="n">long</span><span class="p">)</span>
+<span class="n">scores</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">tensor</span><span class="p">([</span><span class="mf">0.460851</span><span class="p">,</span> <span class="mf">0.269833</span><span class="p">,</span> <span class="mf">0.462608</span><span class="p">,</span> <span class="mf">0.298196</span><span class="p">,</span> <span class="mf">0.382881</span><span class="p">,</span> <span class="mf">0.369369</span><span class="p">,</span> <span class="mf">0.272826</span><span class="p">,</span> <span class="mf">0.619459</span><span class="p">])</span>
+
+<span class="n">preds</span> <span class="o">=</span> <span class="p">[</span><span class="nb">dict</span><span class="p">({</span><span class="s2">&quot;boxes&quot;</span><span class="p">:</span><span class="n">boxes</span><span class="p">,</span> <span class="s2">&quot;labels&quot;</span><span class="p">:</span><span class="n">labels</span><span class="p">,</span> <span class="s2">&quot;scores&quot;</span><span class="p">:</span><span class="n">scores</span><span class="p">})]</span>
+<span class="n">preds</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>[{&#39;boxes&#39;: tensor([[429, 219, 528, 247],
+          [433, 260, 506, 336],
+          [518, 314, 603, 369],
+          [592, 310, 634, 388],
+          [403, 384, 517, 461],
+          [405, 429, 519, 470],
+          [433, 272, 499, 341],
+          [413, 390, 515, 459]]),
+  &#39;labels&#39;: tensor([1, 1, 1, 1, 1, 1, 1, 1]),
+  &#39;scores&#39;: tensor([0.4609, 0.2698, 0.4626, 0.2982, 0.3829, 0.3694, 0.2728, 0.6195])}]</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+    {% endraw %}
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="VOC-PASCAL">VOC PASCAL<a class="anchor-link" href="#VOC-PASCAL"> </a></h3>
+</div>
+</div>
+</div>
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">voc_pascal</span> <span class="o">=</span> <span class="n">create_mAP_metric</span><span class="p">(</span><span class="mf">0.5</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mf">0.</span><span class="p">,</span> <span class="mf">1.1</span><span class="p">,</span> <span class="mf">0.1</span><span class="p">),</span> <span class="s2">&quot;greedy&quot;</span><span class="p">,</span> <span class="s2">&quot;VOC PASCAL mAP&quot;</span><span class="p">,</span> 
+                               <span class="n">remove_background_class</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">voc_pascal</span><span class="o">.</span><span class="n">func</span><span class="p">(</span><span class="n">preds</span><span class="p">,</span> <span class="n">targs</span><span class="p">,</span> <span class="n">num_classes</span><span class="o">=</span><span class="n">num_classes</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>tensor(0.5000)</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+    {% endraw %}
+
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">voc_pascal_all_pnts</span> <span class="o">=</span> <span class="n">create_mAP_metric</span><span class="p">(</span><span class="mf">0.5</span><span class="p">,</span> <span class="kc">None</span><span class="p">,</span> <span class="s2">&quot;greedy&quot;</span><span class="p">,</span> <span class="s2">&quot;VOC PASCAL mAP all points&quot;</span><span class="p">,</span> 
+                                        <span class="n">remove_background_class</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">voc_pascal_all_pnts</span><span class="o">.</span><span class="n">func</span><span class="p">(</span><span class="n">preds</span><span class="p">,</span> <span class="n">targs</span><span class="p">,</span> <span class="n">num_classes</span><span class="o">=</span><span class="n">num_classes</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>tensor(0.5000)</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+    {% endraw %}
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="COCO-mAP">COCO mAP<a class="anchor-link" href="#COCO-mAP"> </a></h3>
+</div>
+</div>
+</div>
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">coco_map_50</span> <span class="o">=</span> <span class="n">create_mAP_metric</span><span class="p">(</span><span class="mf">0.5</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mf">0.</span><span class="p">,</span> <span class="mf">1.01</span><span class="p">,</span> <span class="mf">0.01</span><span class="p">),</span> <span class="s2">&quot;soft&quot;</span><span class="p">,</span> <span class="s2">&quot;COCO mAP@0.5&quot;</span><span class="p">,</span> 
+                                <span class="n">remove_background_class</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">coco_map_50</span><span class="o">.</span><span class="n">func</span><span class="p">(</span><span class="n">preds</span><span class="p">,</span> <span class="n">targs</span><span class="p">,</span> <span class="n">num_classes</span><span class="o">=</span><span class="n">num_classes</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>tensor(0.5000)</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+    {% endraw %}
+
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">coco_map_50_95</span> <span class="o">=</span> <span class="n">create_mAP_metric</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mf">0.5</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mf">.05</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mf">0.</span><span class="p">,</span> <span class="mf">1.01</span><span class="p">,</span> <span class="mf">0.01</span><span class="p">),</span> <span class="s2">&quot;soft&quot;</span><span class="p">,</span> <span class="s2">&quot;COCO mAP@[0.5:0.95]&quot;</span><span class="p">,</span> 
+                                <span class="n">remove_background_class</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">coco_map_50_95</span><span class="o">.</span><span class="n">func</span><span class="p">(</span><span class="n">preds</span><span class="p">,</span> <span class="n">targs</span><span class="p">,</span> <span class="n">num_classes</span><span class="o">=</span><span class="n">num_classes</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>tensor(0.1573)</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+    {% endraw %}
+
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">test_close</span><span class="p">(</span><span class="n">voc_pascal</span><span class="o">.</span><span class="n">func</span><span class="p">(</span><span class="n">preds</span><span class="p">,</span> <span class="n">targs</span><span class="p">,</span> <span class="n">num_classes</span><span class="o">=</span><span class="mi">2</span><span class="p">),</span> <span class="mf">0.5</span><span class="p">,</span> <span class="n">eps</span><span class="o">=</span><span class="mf">1e-03</span><span class="p">)</span>
+<span class="n">test_close</span><span class="p">(</span><span class="n">voc_pascal_all_pnts</span><span class="o">.</span><span class="n">func</span><span class="p">(</span><span class="n">preds</span><span class="p">,</span> <span class="n">targs</span><span class="p">,</span> <span class="n">num_classes</span><span class="o">=</span><span class="mi">2</span><span class="p">),</span> <span class="mf">0.5</span><span class="p">,</span> <span class="n">eps</span><span class="o">=</span><span class="mf">1e-03</span><span class="p">)</span>
+<span class="n">test_close</span><span class="p">(</span><span class="n">coco_map_50</span><span class="o">.</span><span class="n">func</span><span class="p">(</span><span class="n">preds</span><span class="p">,</span> <span class="n">targs</span><span class="p">,</span> <span class="n">num_classes</span><span class="o">=</span><span class="mi">2</span><span class="p">),</span> <span class="mf">0.5</span><span class="p">,</span> <span class="n">eps</span><span class="o">=</span><span class="mf">1e-03</span><span class="p">)</span>
+<span class="n">test_close</span><span class="p">(</span><span class="n">coco_map_50_95</span><span class="o">.</span><span class="n">func</span><span class="p">(</span><span class="n">preds</span><span class="p">,</span> <span class="n">targs</span><span class="p">,</span> <span class="n">num_classes</span><span class="o">=</span><span class="mi">2</span><span class="p">),</span> <span class="mf">0.157</span><span class="p">,</span> <span class="n">eps</span><span class="o">=</span><span class="mf">1e-03</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    {% endraw %}
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Prebuilt-metrics">Prebuilt metrics<a class="anchor-link" href="#Prebuilt-metrics"> </a></h2>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>There are some prebuilt metrics, which you can use instantly:</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>COCO mAP:</p>
+<ul>
+<li><a href="/fastai_object_detection/metrics.html#mAP_at_IoU40"><code>mAP_at_IoU40</code></a> </li>
+<li><a href="/fastai_object_detection/metrics.html#mAP_at_IoU50"><code>mAP_at_IoU50</code></a> </li>
+<li><a href="/fastai_object_detection/metrics.html#mAP_at_IoU60"><code>mAP_at_IoU60</code></a></li>
+<li><a href="/fastai_object_detection/metrics.html#mAP_at_IoU70"><code>mAP_at_IoU70</code></a> </li>
+<li><a href="/fastai_object_detection/metrics.html#mAP_at_IoU80"><code>mAP_at_IoU80</code></a></li>
+<li><a href="/fastai_object_detection/metrics.html#mAP_at_IoU90"><code>mAP_at_IoU90</code></a> </li>
+<li><a href="/fastai_object_detection/metrics.html#mAP_at_IoU50_95"><code>mAP_at_IoU50_95</code></a> (mAP@[0.50:0.95:0.05])</li>
+</ul>
+
+</div>
+</div>
+</div>
 </div>
  
 

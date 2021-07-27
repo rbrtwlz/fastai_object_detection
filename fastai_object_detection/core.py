@@ -19,7 +19,6 @@ def show_binmask(im, ax=None, figsize=None, title=None, ctx=None, **kwargs):
     if ax is None: _,ax = plt.subplots(figsize=figsize)
     for m in im:
         c = (np.random.random(3) * 0.6 + 0.4)
-        #draw_mask(ax, m, c)
         color_mask = np.ones((*m.shape, 3)) * c
         ax.imshow(np.dstack((color_mask, m * 0.5)))
         ax.contour(m, colors=[color_mask[0, 0, :]], alpha=0.4)

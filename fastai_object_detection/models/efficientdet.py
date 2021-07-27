@@ -22,7 +22,8 @@ class EffDetModelWrapper(Module):
         """Wrapper for EfficientDet model combined with loss function"""
         super().__init__()
         self.criterion = FocalLoss(alpha=focal_loss_alpha, gamma=focal_loss_gamma)
-        self.model = EfficientDetBackbone(num_classes=num_classes, compound_coef=compound_coef, ratios=eval(ratios), scales=eval(scales))
+        self.model = EfficientDetBackbone(num_classes=num_classes, compound_coef=compound_coef,
+                                          ratios=eval(ratios), scales=eval(scales))
         self.model.train()
         self.training = True
         self.nms_score_thresh = nms_score_thresh

@@ -65,7 +65,7 @@ dls = ObjectDetectionDataLoaders.from_df(df, bs=2,
 dls.show_batch()
 ```
 
-Now you are ready to create your `fasterrcnn_learner` to train a [FasterRCNN](https://arxiv.org/abs/1506.01497) model (with resnet 50 backbone). To validate your models predictions you can use metrics like `mAP_at_IoU60`.
+Now you are ready to create your `fasterrcnn_learner` to train a [FasterRCNN](https://arxiv.org/abs/1506.01497) model (with resnet50 backbone). To validate your models predictions you can use metrics like `mAP_at_IoU60`.
 
 ```python
 learn = fasterrcnn_learner(dls, fasterrcnn_resnet50, 
