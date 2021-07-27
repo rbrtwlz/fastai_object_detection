@@ -10,6 +10,7 @@ from fastprogress.fastprogress import progress_bar
 from .callbacks import *
 from .models.all import *
 from .metrics import *
+from .core import TensorBinMasks
 
 # Cell
 
@@ -44,7 +45,6 @@ def get_preds(x:ObjDetLearner, items=None, item_tfms=None, batch_tfms=None,
               box_score_thresh=0.05, max_n=None, progress=True):
 
     if items is not None:
-        #if item_tfms is None: item_tfms = [Resize(800, method="pad", pad_mode="zeros")]
         dblock = DataBlock(
             blocks=(ImageBlock(cls=PILImage)),
             item_tfms=item_tfms,
@@ -90,7 +90,7 @@ def get_preds(x:ObjDetLearner, items=None, item_tfms=None, batch_tfms=None,
 
 @patch
 def show_results(x:ObjDetLearner, items=None, item_tfms=None, batch_tfms=None,
-                 box_score_thresh=0.50, max_n=None, progress=False):
+                 box_score_thresh=0.50, max_n=5, progress=False):
 
     inputs, boxes, labels, scores = x.get_preds(items=items, item_tfms=item_tfms, batch_tfms=batch_tfms,
                                                    box_score_thresh=box_score_thresh, max_n=max_n, progress=progress)
@@ -109,20 +109,28 @@ class InstSegLearner(Learner): pass
 # Cell
 
 @patch
-def get_preds(x:InstSegLearner, items, item_tfms=None, batch_tfms=None, box_score_thresh=0.05, bin_mask_thresh=None):
-    if item_tfms is None: item_tfms = [Resize(800, method="pad", pad_mode="zeros")]
-    dblock = DataBlock(
-        blocks=(ImageBlock(cls=PILImage)),
-        item_tfms=item_tfms,
-        batch_tfms=batch_tfms)
-    test_dl = dblock.dataloaders(items).test_dl(items, bs=x.dls.bs)
+def get_preds(x:InstSegLearner, items=None, item_tfms=None, batch_tfms=None,
+              box_score_thresh=0.05, bin_mask_thresh=None, max_n=None, progress=True):
+
+    if items is not None:
+        dblock = DataBlock(
+            blocks=(ImageBlock(cls=PILImage)),
+            item_tfms=item_tfms,
+            batch_tfms=batch_tfms)
+        test_dl = dblock.dataloaders(items).test_dl(items, bs=x.dls.bs)
+    else:
+        test_dl = x.dls.valid.new(shuffle=True)
+
     inputs,preds = [],[]
     with torch.no_grad():
-        for i,batch in enumerate(progress_bar(test_dl)):
+        for i,batch in enumerate(progress_bar(test_dl, display=progress)):
             x.model.eval()
-            preds.append(x.model(*batch))
-            inputs.append(*batch)
+            preds.append(x.model(batch[0]))
+            inputs.append(batch[0])
             x.model.train()
+            if max_n is not None:
+                if len(inputs)*test_dl.bs>=max_n:
+                    break
     # preds: num_batches x bs x dict["boxes", "labels", ...]
     # flatten:
     preds = [i for p in preds for i in p]
@@ -142,10 +150,10 @@ def get_preds(x:InstSegLearner, items, item_tfms=None, batch_tfms=None, box_scor
     labels = [p["labels"][filt[i]].cpu() for i,p in enumerate(preds)]
     scores = [p["scores"][filt[i]].cpu() for i,p in enumerate(preds)]
 
+
     # denormalize inputs
     inputs = [x.dls.valid.decode([i])[0][0] for i in inputs]
 
-    #print(len(masks))
     # by default returns masks in [N, 1, H, W] with activations
     # if you want binary masks in [N, H, W] set bin_mask_thresh
     if bin_mask_thresh is not None:
@@ -156,13 +164,17 @@ def get_preds(x:InstSegLearner, items, item_tfms=None, batch_tfms=None, box_scor
 
 
 @patch
-def show_results(x:InstSegLearner, items, max_n=9, box_score_thresh=0.6, bin_mask_thresh=0.5, **kwargs):
-    inputs, masks, bboxes, labels, scores  = x.get_preds(items=items, box_score_thresh=box_score_thresh)
+def show_results(x:InstSegLearner, items=None, item_tfms=None, batch_tfms=None,
+                 box_score_thresh=0.50, bin_mask_thresh=0.50, max_n=5, progress=False):
 
-    for i,m in enumerate(masks):
-        background = torch.ones([1,1,m.shape[-2],m.shape[-1]]) * bin_mask_thresh
-        m = torch.cat([background, m])
-        masks[i] = torch.argmax(m, dim=0).squeeze(0)
+    inputs, masks, boxes, labels, scores = x.get_preds(items=items, item_tfms=item_tfms, batch_tfms=batch_tfms,
+                                                box_score_thresh=box_score_thresh, bin_mask_thresh=bin_mask_thresh,
+                                                max_n=max_n, progress=progress)
+
+    #for i,m in enumerate(masks):
+    #    background = torch.ones([1, m.shape[-2], m.shape[-1]]) * bin_mask_thresh
+    #    m = torch.cat([background, m])
+    #    masks[i] = torch.argmax(m, dim=0).squeeze(0)
 
     #idx = 10
     for idx in range(len(inputs)):
@@ -170,8 +182,8 @@ def show_results(x:InstSegLearner, items, max_n=9, box_score_thresh=0.6, bin_mas
             if idx >= max_n: break
         fig, ax = plt.subplots(figsize=(8,8))
         TensorImage(inputs[idx]).show(ax=ax),
-        TensorMask(masks[idx]).show(ax),
-        LabeledBBox(TensorBBox(bboxes[idx]), [x.dls.vocab[int(l.item())]
+        TensorBinMasks(masks[idx]).show(ax),
+        LabeledBBox(TensorBBox(boxes[idx]), [x.dls.vocab[int(l.item())]
                                               for l in labels[idx]]).show(ax)
 
 # Cell
