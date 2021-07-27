@@ -8,14 +8,15 @@ from fastai.torch_basics import *
 from fastai.torch_core import *
 
 # Cell
-# fix
-# https://github.com/fastai/fastai/issues/3384
+# fix https://github.com/fastai/fastai/issues/3384
 
 from fastai.vision.core import TensorBBox
 from .core import TensorBinMasks
+from torch import Tensor
 
-TensorMultiCategory.register_func(Tensor.__getitem__, TensorMultiCategory, TensorBBox)
-TensorMultiCategory.register_func(Tensor.__getitem__, TensorMultiCategory, TensorBinMasks)
+TensorMultiCategory.register_func(Tensor.__getitem__, TensorMultiCategory, TensorBBox, TensorBinMasks)
+TensorMultiCategory.register_func(Tensor.__getitem__, TensorMultiCategory, TensorBBox, TensorBinMasks)
+
 
 # Cell
 class ObjDetAdapter(Callback):
