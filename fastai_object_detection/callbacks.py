@@ -14,8 +14,7 @@ from fastai.vision.core import TensorBBox
 from .core import TensorBinMasks
 from torch import Tensor
 
-TensorMultiCategory.register_func(Tensor.__getitem__, TensorMultiCategory, TensorBBox, TensorBinMasks)
-TensorMultiCategory.register_func(Tensor.__getitem__, TensorMultiCategory, TensorBBox, TensorBinMasks)
+
 
 
 # Cell
@@ -23,7 +22,10 @@ class ObjDetAdapter(Callback):
     """Callback to convert batches from fastai's dataloader to the
     expected input of object detection and instance segmentation models"""
 
-    def __init__(self, pad_idx=0): self.pad_idx = pad_idx
+    def __init__(self, pad_idx=0):
+        self.pad_idx = pad_idx
+        TensorMultiCategory.register_func(Tensor.__getitem__, TensorMultiCategory, TensorBBox, TensorBinMasks)
+        TensorMultiCategory.register_func(Tensor.__getitem__, TensorMultiCategory, TensorBBox, TensorBinMasks)
 
     def after_create(self):
         self.learn.save_xb = []
