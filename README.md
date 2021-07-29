@@ -1,5 +1,5 @@
 # fastai_object_detection
-> Extension for <a href='https://docs.fast.ai'>fastai</a> library to include object recognition.
+> Extension for <a href='https://docs.fast.ai'>fastai</a> library to include object detection and instance segmentation.
 
 
 ## Install
