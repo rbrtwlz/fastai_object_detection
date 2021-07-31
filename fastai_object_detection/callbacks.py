@@ -28,14 +28,12 @@ class ObjDetAdapter(Callback):
         self.learn.yb = []
 
     def after_pred(self):
-
         # leave yb empty to skip loss calc
         loss = sum(loss for loss in self.learn.pred.values())
         self.learn.loss_grad = loss
         self.learn.loss = self.learn.loss_grad.clone()
 
     def after_loss(self):
-
         # set yb for recorder to log train loss
         self.learn.yb = self.learn.save_yb
 
@@ -49,15 +47,12 @@ class ObjDetAdapter(Callback):
             self.learn.yb = yb
             self.learn.model.train()
 
-
     def after_batch(self):
         self.learn.model.train()
-
 
     def before_validate(self):
         # set model to train to get valid loss
         self.learn.model.train()
-
 
     def transform_batch(self,x1,*yb):
         yb = [*yb]
@@ -72,7 +67,8 @@ class ObjDetAdapter(Callback):
         for i,k in enumerate(keys):
             y[k] = [e for e in yb[i]]
 
-        y = [dict(zip(y,t)) for t in zip(*y.values())] # dict of lists to list of dicts
+        # dict of lists to list of dicts
+        y = [dict(zip(y,t)) for t in zip(*y.values())]
 
         for d in y:
             # remove padding
@@ -82,7 +78,6 @@ class ObjDetAdapter(Callback):
 
             # remove empty bboxes
             filt = (d["boxes"][:,0]-d["boxes"][:,2])*(d["boxes"][:,1]-d["boxes"][:,3])!=0
-            #filt = torch.eq(d["boxes"], tensor([[0.,0.,0.,0.]], device=dev)).all(dim=1)
             for k in keys:
                 d[k] = d[k][filt]
 

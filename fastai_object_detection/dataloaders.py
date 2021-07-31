@@ -48,7 +48,7 @@ class ObjectDetectionDataLoaders(DataLoaders):
                 bbox_cols=["x_min", "y_min", "x_max", "y_max"], class_col="class_name",
                 mask_path_col="mask_path", object_id_col="object_id",
                 seed=None, vocab=None, add_na=True, item_tfms=None, batch_tfms=None, debug=False, **kwargs):
-        """Create dataloaders from DataFrame"""
+        """Create dataloaders from `DataFrame`"""
 
         if vocab is None :
                 vocab = [c for c in df[class_col].unique()]

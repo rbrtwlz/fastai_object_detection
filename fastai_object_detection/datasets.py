@@ -75,9 +75,9 @@ class CocoData():
             if (path/"df_train.csv").is_file():
                 return (path, pd.read_csv(path/"df_train.csv"))
             else:
-                print("No Dataframe found in "+str(path))
+                print(f"No Dataframe found in {path}")
         else:
-            print("No dataset '"+str(path)+"' found.")
+            print(f"No dataset '{path}' found.")
             print("Create dataset first with CocoData.create(ds_name, cat_list) or list available datasets with CocoData.ls()")
 
 

@@ -6,6 +6,10 @@
 
 `pip install --upgrade git+https://github.com/rbrtwlz/fastai_object_detection`
 
+## Documentation
+
+You can find a detailed documentation with examples [here](https://rbrtwlz.github.io/fastai_object_detection/).
+
 ## Usage
 
 This package makes object detection and instance segmentation models available for fastai users by using 
@@ -146,7 +150,7 @@ dls.show_batch(figsize=(10,10))
 ```
 
 
-![png](docs/images/output_17_0.png)
+![png](docs/images/output_19_0.png)
 
 
 Then you can choose which architectur you want to use. 
@@ -192,7 +196,7 @@ learn.lr_find()
 
 
 
-![png](docs/images/output_21_2.png)
+![png](docs/images/output_23_2.png)
 
 
 ```
