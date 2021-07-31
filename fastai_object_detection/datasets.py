@@ -105,11 +105,6 @@ class CocoData():
         img_ids = [i for i in df.image_id.unique()]
         shuffle(img_ids)
         with_mask = "mask_path" in df.columns
-        from matplotlib import cm
-        # transparent, blue, red, yellow, green, orange, black
-        # if more than 6 objects, rest is black
-        colors_cmap = ["#ffffff99", "#0000ffcc", "#ff0000cc","#ffff00cc", "#4bdd75cc", "#bd6914cc", "#000000cc"]
-        cmap1 = ListedColormap(colors_cmap)
         for img_id in img_ids[:n]:
             filt = df.image_id == img_id
             img_path = df.loc[filt,"image_path"].values[0]
