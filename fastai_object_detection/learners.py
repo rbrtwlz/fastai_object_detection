@@ -198,12 +198,12 @@ class fasterrcnn_learner(ObjDetLearner):
                  # other model args
                  **kwargs):
 
-        num_classes = len(dls.vocab) if num_classes is None else num_classes
+        if num_classes is None: num_classes = len(dls.vocab)
         cbs = [ObjDetAdapter()] if cbs is None else L(ObjDetAdapter())+L(cbs)
         #if cbs is None: cbs = [ObjDetAdapter()]
         #else: cbs = L(ObjDetAdapter())+L(cbs)
         model = model(num_classes=num_classes, pretrained=pretrained, pretrained_backbone=pretrained_backbone, **kwargs)
-        splitter = rcnn_split if splitter is None else splitter
+        if splitter is None: splitter = rcnn_split
 
         super().__init__(dls=dls, model=model, loss_func=loss_func, opt_func=opt_func, lr=lr, splitter=splitter, cbs=cbs,
                    metrics=metrics, path=path, model_dir=model_dir, wd=wd, wd_bn_bias=wd_bn_bias, train_bn=train_bn,
@@ -221,10 +221,10 @@ class maskrcnn_learner(InstSegLearner):
                  # other model args
                  **kwargs):
 
-        num_classes = len(dls.vocab) if num_classes is None else num_classes
+        if num_classes is None: num_classes = len(dls.vocab)
         cbs = [ObjDetAdapter()] if cbs is None else L(ObjDetAdapter())+L(cbs)
         model = model(num_classes=num_classes, pretrained=pretrained, pretrained_backbone=pretrained_backbone, **kwargs)
-        splitter = rcnn_split if splitter is None else splitter
+        if splitter is None: splitter = rcnn_split
 
         super().__init__(dls=dls, model=model, loss_func=loss_func, opt_func=opt_func, lr=lr, splitter=splitter, cbs=cbs,
                    metrics=metrics, path=path, model_dir=model_dir, wd=wd, wd_bn_bias=wd_bn_bias, train_bn=train_bn,
@@ -243,11 +243,8 @@ class efficientdet_learner(ObjDetLearner):
                  **kwargs):
 
         if num_classes is None: num_classes = len(dls.vocab) - 1 # without #na#, no background
-
         cbs = [ObjDetAdapter()] if cbs is None else L(ObjDetAdapter())+L(cbs)
-
         model = model(num_classes=num_classes, pretrained=pretrained, pretrained_backbone=pretrained_backbone, **kwargs)
-
         if splitter is None: splitter = effdet_split
 
         super().__init__(dls=dls, model=model, loss_func=loss_func, opt_func=opt_func, lr=lr, splitter=splitter, cbs=cbs,
