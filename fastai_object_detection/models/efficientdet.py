@@ -74,7 +74,8 @@ class EffDetModelWrapper(Module):
         for i in range(x.shape[0]):
             if scores_over_thresh[i].sum() == 0:
                 out.append({
-                    'boxes': torch.tensor(()),
+                    'boxes': torch.empty([0,4]),
+                    #'boxes': torch.tensor(()),
                     'labels': torch.tensor(()),
                     'scores': torch.tensor(()),
                 })
@@ -98,7 +99,8 @@ class EffDetModelWrapper(Module):
                 })
             else:
                 out.append({
-                    'boxes': torch.tensor(()),
+                    'boxes': torch.empty([0,4]),
+                    #'boxes': torch.tensor(()),
                     'labels': torch.tensor(()),
                     'scores': torch.tensor(()),
                 })
