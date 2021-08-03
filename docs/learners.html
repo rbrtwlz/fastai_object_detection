@@ -185,7 +185,7 @@ nb_path: "notebooks/05_learners.ipynb"
 <div class="output_markdown rendered_html output_subarea ">
 <h4 id="ObjDetLearner.get_preds" class="doc_header"><code>ObjDetLearner.get_preds</code><a href="https://github.com/rbrtwlz/fastai_object_detection/tree/master/fastai_object_detection/learners.py#L43" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>ObjDetLearner.get_preds</code>(<strong><code>x</code></strong>:<a href="/fastai_object_detection/learners.html#ObjDetLearner"><code>ObjDetLearner</code></a>, <strong><code>items</code></strong>=<em><code>None</code></em>, <strong><code>item_tfms</code></strong>=<em><code>None</code></em>, <strong><code>batch_tfms</code></strong>=<em><code>None</code></em>, <strong><code>box_score_thresh</code></strong>=<em><code>0.05</code></em>, <strong><code>max_n</code></strong>=<em><code>None</code></em>, <strong><code>progress</code></strong>=<em><code>True</code></em>)</p>
 </blockquote>
-<p>Get predictions of an <a href="/fastai_object_detection/learners.html#ObjDetLearner"><code>ObjDetLearner</code></a>. Set items to a list of PIL images, optionally with
+<p>Get predictions of an <a href="/fastai_object_detection/learners.html#ObjDetLearner"><code>ObjDetLearner</code></a>. Set <code>items</code> to a list of PIL images, optionally with
 item and batch transforms. Returns denormalized inputs, bounding boxes, labels and scores as lists of
 tensors.</p>
 
@@ -212,7 +212,7 @@ tensors.</p>
 <div class="output_markdown rendered_html output_subarea ">
 <h4 id="ObjDetLearner.show_results" class="doc_header"><code>ObjDetLearner.show_results</code><a href="https://github.com/rbrtwlz/fastai_object_detection/tree/master/fastai_object_detection/learners.py#L95" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>ObjDetLearner.show_results</code>(<strong><code>x</code></strong>:<a href="/fastai_object_detection/learners.html#ObjDetLearner"><code>ObjDetLearner</code></a>, <strong><code>items</code></strong>=<em><code>None</code></em>, <strong><code>item_tfms</code></strong>=<em><code>None</code></em>, <strong><code>batch_tfms</code></strong>=<em><code>None</code></em>, <strong><code>box_score_thresh</code></strong>=<em><code>0.5</code></em>, <strong><code>max_n</code></strong>=<em><code>5</code></em>, <strong><code>progress</code></strong>=<em><code>False</code></em>)</p>
 </blockquote>
-<p>Show results of a trained <a href="/fastai_object_detection/learners.html#ObjDetLearner"><code>ObjDetLearner</code></a>. If no items are specified, it uses images from
+<p>Show results of a trained <a href="/fastai_object_detection/learners.html#ObjDetLearner"><code>ObjDetLearner</code></a>. If no <code>items</code> are specified, it uses images from
 the validation dataloader.</p>
 
 </div>
@@ -279,7 +279,7 @@ the validation dataloader.</p>
 </blockquote>
 <p>Get predictions of an <a href="/fastai_object_detection/learners.html#InstSegLearner"><code>InstSegLearner</code></a>. Set <code>items</code> to a list of PIL images, optionally with
 item and batch transforms. Returns denormalized inputs, masks, bounding boxes, labels and scores as lists of
-tensors. By default it returns masks in [N,1,H,W] with actications. If you want binary masks in [N,H,W],
+tensors. By default it returns masks in <code>[N,1,H,W]</code> with activations. If you want binary masks in <code>[N,H,W]</code>,
 set a value for <code>bin_mask_thresh</code> (N: number of objects).</p>
 
 </div>
@@ -305,7 +305,7 @@ set a value for <code>bin_mask_thresh</code> (N: number of objects).</p>
 <div class="output_markdown rendered_html output_subarea ">
 <h4 id="InstSegLearner.show_results" class="doc_header"><code>InstSegLearner.show_results</code><a href="https://github.com/rbrtwlz/fastai_object_detection/tree/master/fastai_object_detection/learners.py#L177" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>InstSegLearner.show_results</code>(<strong><code>x</code></strong>:<a href="/fastai_object_detection/learners.html#InstSegLearner"><code>InstSegLearner</code></a>, <strong><code>items</code></strong>=<em><code>None</code></em>, <strong><code>item_tfms</code></strong>=<em><code>None</code></em>, <strong><code>batch_tfms</code></strong>=<em><code>None</code></em>, <strong><code>box_score_thresh</code></strong>=<em><code>0.5</code></em>, <strong><code>bin_mask_thresh</code></strong>=<em><code>0.5</code></em>, <strong><code>max_n</code></strong>=<em><code>5</code></em>, <strong><code>progress</code></strong>=<em><code>False</code></em>)</p>
 </blockquote>
-<p>Show results of a trained <a href="/fastai_object_detection/learners.html#InstSegLearner"><code>InstSegLearner</code></a>. If no items are specified, it uses images from
+<p>Show results of a trained <a href="/fastai_object_detection/learners.html#InstSegLearner"><code>InstSegLearner</code></a>. If no <code>items</code> are specified, it uses images from
 the validation dataloader.</p>
 
 </div>
