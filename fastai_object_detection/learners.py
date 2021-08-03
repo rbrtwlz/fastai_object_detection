@@ -43,6 +43,10 @@ class ObjDetLearner(Learner): pass
 @patch
 def get_preds(x:ObjDetLearner, items=None, item_tfms=None, batch_tfms=None,
               box_score_thresh=0.05, max_n=None, progress=True):
+    """Get predictions of an `ObjDetLearner`. Set items to a list of PIL images, optionally with
+    item and batch transforms. Returns denormalized inputs, bounding boxes, labels and scores as lists of
+    tensors.
+    """
 
     if items is not None:
         dblock = DataBlock(
@@ -91,6 +95,8 @@ def get_preds(x:ObjDetLearner, items=None, item_tfms=None, batch_tfms=None,
 @patch
 def show_results(x:ObjDetLearner, items=None, item_tfms=None, batch_tfms=None,
                  box_score_thresh=0.50, max_n=5, progress=False):
+    """Show results of a trained `ObjDetLearner`. If no items are specified, it uses images from
+    the validation dataloader."""
 
     inputs, boxes, labels, scores = x.get_preds(items=items, item_tfms=item_tfms, batch_tfms=batch_tfms,
                                                    box_score_thresh=box_score_thresh, max_n=max_n, progress=progress)
@@ -111,6 +117,11 @@ class InstSegLearner(Learner): pass
 @patch
 def get_preds(x:InstSegLearner, items=None, item_tfms=None, batch_tfms=None,
               box_score_thresh=0.05, bin_mask_thresh=None, max_n=None, progress=True):
+    """Get predictions of an `InstSegLearner`. Set `items` to a list of PIL images, optionally with
+    item and batch transforms. Returns denormalized inputs, masks, bounding boxes, labels and scores as lists of
+    tensors. By default it returns masks in [N,1,H,W] with actications. If you want binary masks in [N,H,W],
+    set a value for `bin_mask_thresh` (N: number of objects).
+    """
 
     if items is not None:
         dblock = DataBlock(
@@ -166,6 +177,8 @@ def get_preds(x:InstSegLearner, items=None, item_tfms=None, batch_tfms=None,
 @patch
 def show_results(x:InstSegLearner, items=None, item_tfms=None, batch_tfms=None,
                  box_score_thresh=0.50, bin_mask_thresh=0.50, max_n=5, progress=False):
+    """Show results of a trained `InstSegLearner`. If no items are specified, it uses images from
+    the validation dataloader."""
 
     inputs, masks, boxes, labels, scores = x.get_preds(items=items, item_tfms=item_tfms, batch_tfms=batch_tfms,
                                                 box_score_thresh=box_score_thresh, bin_mask_thresh=bin_mask_thresh,
