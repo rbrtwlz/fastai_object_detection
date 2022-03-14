@@ -12,6 +12,7 @@ TensorBase.register_func(Tensor.__getitem__, TensorBase, TensorMultiCategory, Te
 TensorMultiCategory.register_func(Tensor.__getitem__, TensorBase, TensorMultiCategory, TensorBBox, TensorCategory)
 TensorBBox.register_func(Tensor.__getitem__, TensorBase, TensorMultiCategory, TensorBBox, TensorCategory)
 TensorCategory.register_func(Tensor.__getitem__, TensorBase, TensorMultiCategory, TensorBBox, TensorCategory)
+TensorBBox.register_func(TensorBBox.__getitem__, TensorBase, TensorMultiCategory, TensorBBox, TensorCategory)
 
 # Cell
 class ObjDetAdapter(Callback):
