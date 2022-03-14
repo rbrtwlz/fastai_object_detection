@@ -7,6 +7,11 @@ from fastai.callback.all import *
 from fastai.torch_basics import *
 from fastai.torch_core import *
 
+TensorBase.register_func(Tensor.__getitem__, TensorBase, TensorMultiCategory, TensorBBox, TensorCategory)
+TensorMultiCategory.register_func(Tensor.__getitem__, TensorBase, TensorMultiCategory, TensorBBox, TensorCategory)
+TensorBBox.register_func(Tensor.__getitem__, TensorBase, TensorMultiCategory, TensorBBox, TensorCategory)
+TensorBBox.register_func(Tensor.__getitem__, TensorBase, TensorMultiCategory, TensorBBox, TensorCategory)
+
 # Cell
 class ObjDetAdapter(Callback):
     """Callback to convert batches from fastai's dataloader to the
