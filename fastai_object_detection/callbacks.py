@@ -6,11 +6,12 @@ __all__ = ['ObjDetAdapter']
 from fastai.callback.all import *
 from fastai.torch_basics import *
 from fastai.torch_core import *
+from fastai.vision.core import TensorBBox
 
 TensorBase.register_func(Tensor.__getitem__, TensorBase, TensorMultiCategory, TensorBBox, TensorCategory)
 TensorMultiCategory.register_func(Tensor.__getitem__, TensorBase, TensorMultiCategory, TensorBBox, TensorCategory)
 TensorBBox.register_func(Tensor.__getitem__, TensorBase, TensorMultiCategory, TensorBBox, TensorCategory)
-TensorBBox.register_func(Tensor.__getitem__, TensorBase, TensorMultiCategory, TensorBBox, TensorCategory)
+TensorCategory.register_func(Tensor.__getitem__, TensorBase, TensorMultiCategory, TensorBBox, TensorCategory)
 
 # Cell
 class ObjDetAdapter(Callback):
