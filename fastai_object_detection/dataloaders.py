@@ -60,7 +60,6 @@ class ObjectDetectionDataLoaders(DataLoaders):
         cls.valid_col = valid_col
 
         with_mask = mask_path_col in df.columns
-        splitter =  ColSplitter(valid_col) if valid_col is not None else RandomSplitter(valid_pct)
 
         if valid_col is not None:
             cls.valid_split = ColSplitter(valid_col)(df)
@@ -131,7 +130,6 @@ class ObjectDetectionDataLoaders(DataLoaders):
         filt = df[img_path_col] == fn
         mask_paths = [m for m in df.loc[filt, mask_path_col]]
         return mask_paths
-<<<<<<< HEAD
 
     def _func_valid(fn):
         df = ObjectDetectionDataLoaders.df
@@ -141,5 +139,3 @@ class ObjectDetectionDataLoaders(DataLoaders):
         filt = df[img_path_col] == fn
         valids = [v for v in df.loc[filt, valid_col]]
         return valids[0]
-=======
->>>>>>> 1944e5aa7fc855563a0e8e651b1b58c27ffb9589
