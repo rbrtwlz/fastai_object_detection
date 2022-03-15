@@ -46,7 +46,7 @@ class ObjectDetectionDataLoaders(DataLoaders):
     @delegates(DataLoaders.from_dblock)
     def from_df(cls, df, valid_pct=0.2, img_id_col="image_id", img_path_col="image_path",
                 bbox_cols=["x_min", "y_min", "x_max", "y_max"], class_col="class_name",
-                mask_path_col="mask_path", object_id_col="object_id", valid_col=None,
+                mask_path_col="mask_path", object_id_col="object_id",
                 seed=None, vocab=None, add_na=True, item_tfms=None, batch_tfms=None, debug=False, **kwargs):
         """Create dataloaders from `DataFrame`"""
 
@@ -57,16 +57,8 @@ class ObjectDetectionDataLoaders(DataLoaders):
         cls.img_id_col,cls.img_path_col,cls.class_col = img_id_col,img_path_col,class_col
         cls.bbox_cols = bbox_cols
         cls.mask_path_col,cls.object_id_col = mask_path_col,object_id_col
-        cls.valid_col = valid_col
 
         with_mask = mask_path_col in df.columns
-        splitter =  ColSplitter(valid_col) if valid_col is not None else RandomSplitter(valid_pct)
-
-        if valid_col is not None:
-            cls.valid_split = ColSplitter(valid_col)(df)
-            splitter = FuncSplitter(cls._func_valid)
-        else:
-            splitter = RandomSplitter(valid_pct)
 
         #if item_tfms is None: item_tfms = [Resize(800, method="pad", pad_mode="zeros")]
 
@@ -74,7 +66,7 @@ class ObjectDetectionDataLoaders(DataLoaders):
             dblock = DataBlock(
                 blocks=(ImageBlock(cls=PILImage), BBoxBlock, BBoxLblBlock(vocab=vocab, add_na=add_na)),
                 n_inp=1,
-                splitter=splitter,
+                splitter=RandomSplitter(valid_pct),
                 get_items=cls._get_images,
                 get_y=[cls._get_bboxes, cls._get_labels],
                 item_tfms=item_tfms,
@@ -88,7 +80,7 @@ class ObjectDetectionDataLoaders(DataLoaders):
                 blocks=(ImageBlock(cls=PILImage), BinaryMasksBlock,
                         BBoxBlock, BBoxLblBlock(vocab=vocab, add_na=add_na)),
                 n_inp=1,
-                splitter=splitter,
+                splitter=RandomSplitter(valid_pct),
                 get_items=cls._get_images,
                 get_y=[cls._get_masks, cls._get_bboxes, cls._get_labels],
                 item_tfms=item_tfms,
@@ -131,15 +123,3 @@ class ObjectDetectionDataLoaders(DataLoaders):
         filt = df[img_path_col] == fn
         mask_paths = [m for m in df.loc[filt, mask_path_col]]
         return mask_paths
-<<<<<<< HEAD
-
-    def _func_valid(fn):
-        df = ObjectDetectionDataLoaders.df
-        img_path_col = ObjectDetectionDataLoaders.img_path_col
-        valid_col = ObjectDetectionDataLoaders.valid_col
-
-        filt = df[img_path_col] == fn
-        valids = [v for v in df.loc[filt, valid_col]]
-        return valids[0]
-=======
->>>>>>> 1944e5aa7fc855563a0e8e651b1b58c27ffb9589
