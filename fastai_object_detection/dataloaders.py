@@ -46,7 +46,7 @@ class ObjectDetectionDataLoaders(DataLoaders):
     @delegates(DataLoaders.from_dblock)
     def from_df(cls, df, valid_pct=0.2, img_id_col="image_id", img_path_col="image_path",
                 bbox_cols=["x_min", "y_min", "x_max", "y_max"], class_col="class_name",
-                mask_path_col="mask_path", object_id_col="object_id",
+                mask_path_col="mask_path", object_id_col="object_id", valid_col=None,
                 seed=None, vocab=None, add_na=True, item_tfms=None, batch_tfms=None, debug=False, **kwargs):
         """Create dataloaders from `DataFrame`"""
 
@@ -59,6 +59,7 @@ class ObjectDetectionDataLoaders(DataLoaders):
         cls.mask_path_col,cls.object_id_col = mask_path_col,object_id_col
 
         with_mask = mask_path_col in df.columns
+        splitter = if valid_col is not None ColSplitter(valid_col) else RandomSplitter(valid_pct)
 
         #if item_tfms is None: item_tfms = [Resize(800, method="pad", pad_mode="zeros")]
 
@@ -66,7 +67,7 @@ class ObjectDetectionDataLoaders(DataLoaders):
             dblock = DataBlock(
                 blocks=(ImageBlock(cls=PILImage), BBoxBlock, BBoxLblBlock(vocab=vocab, add_na=add_na)),
                 n_inp=1,
-                splitter=RandomSplitter(valid_pct),
+                splitter=splitter,
                 get_items=cls._get_images,
                 get_y=[cls._get_bboxes, cls._get_labels],
                 item_tfms=item_tfms,
@@ -80,7 +81,7 @@ class ObjectDetectionDataLoaders(DataLoaders):
                 blocks=(ImageBlock(cls=PILImage), BinaryMasksBlock,
                         BBoxBlock, BBoxLblBlock(vocab=vocab, add_na=add_na)),
                 n_inp=1,
-                splitter=RandomSplitter(valid_pct),
+                splitter=splitter,
                 get_items=cls._get_images,
                 get_y=[cls._get_masks, cls._get_bboxes, cls._get_labels],
                 item_tfms=item_tfms,
