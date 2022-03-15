@@ -59,7 +59,7 @@ class ObjectDetectionDataLoaders(DataLoaders):
         cls.mask_path_col,cls.object_id_col = mask_path_col,object_id_col
 
         with_mask = mask_path_col in df.columns
-        splitter = if valid_col is not None ColSplitter(valid_col) else RandomSplitter(valid_pct)
+        splitter =  ColSplitter(valid_col) if valid_col is not None else RandomSplitter(valid_pct)
 
         #if item_tfms is None: item_tfms = [Resize(800, method="pad", pad_mode="zeros")]
 
