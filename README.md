@@ -150,7 +150,9 @@ dls.show_batch(figsize=(10,10))
 ```
 
 
+    
 ![png](docs/images/output_19_0.png)
+    
 
 
 Then you can choose which architectur you want to use. 
@@ -196,7 +198,9 @@ learn.lr_find()
 
 
 
+    
 ![png](docs/images/output_23_2.png)
+    
 
 
 ```
