@@ -6,7 +6,7 @@ __all__ = ['get_maskrcnn_model', 'maskrcnn_resnet18', 'maskrcnn_resnet34', 'mask
 # Cell
 
 from torchvision.models.detection.backbone_utils import resnet_fpn_backbone
-from torchvision.models.utils import load_state_dict_from_url
+from torch.hub import load_state_dict_from_url
 from torchvision.models.detection.anchor_utils import AnchorGenerator
 from torchvision.models.detection import MaskRCNN
 from torchvision.ops.misc import FrozenBatchNorm2d

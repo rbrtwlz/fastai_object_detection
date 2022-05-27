@@ -61,11 +61,12 @@ class ObjDetAdapter(Callback):
 
         bs,c,h,w = x1.shape
         dev = x1.device
+        x1 = torch.tensor(x1)
 
         y={}
         keys = "masks boxes labels".split() if with_mask else "boxes labels".split()
         for i,k in enumerate(keys):
-            y[k] = [e for e in yb[i]]
+            y[k] = [torch.tensor(e) for e in yb[i]]
 
         # dict of lists to list of dicts
         y = [dict(zip(y,t)) for t in zip(*y.values())]

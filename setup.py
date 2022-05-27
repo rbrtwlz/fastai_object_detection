@@ -9,5 +9,5 @@ setup(
     author_email='abitdevelopment@gmail.com',
     description='fastai extension for object detection',
     packages=find_packages(),    
-    install_requires = ['torch==1.7.1', 'torchvision==0.8.2', 'fastai==2.4.1', 'mean_average_precision @ git+https://github.com/bes-dev/mean_average_precision', 'pycocotools']
+    install_requires = ['torch==1.11.0', 'torchvision==0.12.0', 'fastai==2.6.3', 'mean_average_precision @ git+https://github.com/bes-dev/mean_average_precision', 'pycocotools']
 )

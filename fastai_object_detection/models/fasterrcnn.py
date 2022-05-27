@@ -8,7 +8,7 @@ __all__ = ['get_fasterrcnn_model', 'get_fasterrcnn_model_swin', 'SwinTransformer
 import torch
 import torch.nn as nn
 from torchvision.models.detection.backbone_utils import resnet_fpn_backbone
-from torchvision.models.utils import load_state_dict_from_url
+from torch.hub import load_state_dict_from_url
 from torchvision.models.detection.anchor_utils import AnchorGenerator
 from torchvision.ops.feature_pyramid_network import FeaturePyramidNetwork
 from torchvision.models.detection import FasterRCNN

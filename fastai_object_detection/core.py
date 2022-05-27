@@ -43,6 +43,11 @@ class TensorBinMasks(TensorImageBase):
     def show(self, ctx=None, **kwargs):
         return show_binmask(self,ctx=ctx, **{**self._show_args, **kwargs})
 
+for o in Tensor.add,Tensor.sub,Tensor.mul,Tensor.div,Tensor.__rsub__,Tensor.__radd__,Tensor.__getitem__:
+    TensorBinMasks.register_func(o, TensorImageBase)
+    TensorBinMasks.register_func(o, TensorBBox)
+    TensorBBox.register_func(o, TensorMultiCategory)
+
 # Cell
 
 class TensorBinMasks2TensorMask(Transform):

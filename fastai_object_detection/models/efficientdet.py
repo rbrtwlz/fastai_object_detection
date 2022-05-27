@@ -7,7 +7,7 @@ __all__ = ['EffDetModelWrapper', 'get_efficientdet_model', 'efficientdet_d0', 'e
 import torch
 from torch.nn import Module
 from torchvision.ops.boxes import batched_nms
-from torchvision.models.utils import load_state_dict_from_url
+from torch.hub import load_state_dict_from_url
 from functools import partial
 from fastai.vision.all import delegates
 from ..external.efficientdet_source import FocalLoss, BBoxTransform, ClipBoxes, EfficientDetBackbone
